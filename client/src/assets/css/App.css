@@ -1,9 +1,19 @@
+/* Homepage */
+
+#homepage {
+  padding-top: 8vh;
+  /* height: calc(100vh - 8vh); */
+  justify-content: flex-start;
+}
+
+/* Register stuff */
+
 .register {
   border: 2px solid var(--SECONDARY2);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   background-color: var(--BG);
   width: 600px;
@@ -15,7 +25,7 @@
 .my-input,
 .my-input-button {
   height: auto;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,12 +40,30 @@
   margin-bottom: 4px;
 }
 
-.my-input input,
-.my-input-button button {
-  padding: 8px;
+.my-input input {
+  padding: 12px 16px;
   width: 100%;
+  border: 1px solid var(--SECONDARY);
+  border-radius: 8px;
 }
 
-.my-input-button {
+.my-input input::placeholder {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.input-style {
+  border: none !important;
+  border-bottom: 1px solid var(--PRIMARY);
+  outline: none;
+  font-size: 1.1rem;
+  background-color: var(--BG2);
+}
+
+.my-input-button button {
   margin-top: 8px;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  /* border: 1px solid var(--SECONDARY); */
 }
