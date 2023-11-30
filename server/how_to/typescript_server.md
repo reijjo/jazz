@@ -13,4 +13,10 @@ node_modules
 ## Init TypeScript
 
 - `npm install typescript --save-dev`
--
+- add to package.json
+
+```.json
+  "scripts": {
+    "tsc": "tsc"
+  },
+```
