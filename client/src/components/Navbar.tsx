@@ -10,7 +10,7 @@ const Navbar = ({ isLogin, setIsLogin }: Props) => {
   return (
     <nav>
       <div className="nav-center">
-        <Link to="/" className="nav-links">
+        <Link to="/" className="nav-links" onClick={() => setIsLogin(false)}>
           <h3>home</h3>
         </Link>
         <Link to="/play" className="nav-links">
