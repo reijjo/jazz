@@ -89,13 +89,11 @@ Let's add an npm script for running the application in production mode in packag
 
 ```json
 {
-  // ...
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts",
     "start": "node build/index.js"
   }
-  // ...
 }
 ```
 
