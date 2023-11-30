@@ -21,7 +21,7 @@ node_modules
   },
 ```
 
-- `npm run tsc -- --init` makes tsconfig.json file
+- `npm run tsc -- --init` makes _tsconfig.json_ file
 - comment everything out from tsconfig.json and add this:
 
 ```json
