@@ -1,23 +1,71 @@
 /* Homepage */
 
 #homepage {
-  padding-top: 8vh;
+  padding-top: 10vh;
   /* height: calc(100vh - 8vh); */
-  justify-content: flex-start;
+  /* flex-direction: row; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  /* border: 4px solid red; */
 }
 
-/* Register stuff */
-
-.register {
-  border: 2px solid var(--SECONDARY2);
-  border-radius: 16px;
+.home-image,
+.home-text {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.home-image {
+  /* border: 1px solid blue; */
+  height: 100%;
+}
+
+.home-text {
+  /* border: 1px solid green; */
+  height: 100%;
+}
+
+/* Sign page */
+
+#sign {
+  padding-top: 10vh;
+  justify-content: center;
+}
+
+.register,
+.login {
+  border: 4px solid var(--TEXT);
+  border-radius: 16px;
+  padding: 24px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   background-color: var(--BG);
-  width: 600px;
+  width: max-content;
   height: 60vh;
+  box-shadow: -1px 1px 4px 0 var(--SECONDARY);
+}
+
+.register h2,
+.login h2 {
+  font-size: 2rem;
+  color: var(--TEXT);
+  /* text-shadow: -1px 0 var(--SECONDARY2), 0 1px var(--SECONDARY2),
+    1px 0 var(--SECONDARY2), 0 -1px var(--SECONDARY2); */
+}
+
+.register > form,
+.login > form {
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
 }
 
 /* my-input */

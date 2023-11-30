@@ -1,44 +1,38 @@
-// import MyButton from "../components/MyButton";
-// import MyInput from "../components/MyInput";
+import MyButton from "../components/MyButton";
+
+import yatzy from "../assets/images/template.png";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="homepage">
-      <h1>HOMEPAGE</h1>
-      {/* <div className="register">
-        <h2>Register</h2>
-        <form>
-          <div className="register-inputs"> */}
-      {/* Username input */}
-      {/* <MyInput
-              className="my-input"
-              htmlFor="reg-input-username"
-              labelText="Username"
-              type="text"
-              id="reg-input-username"
-              placeholder="Username..."
-            /> */}
-
-      {/* Password input */}
-      {/* <MyInput
-              className="my-input"
-              htmlFor="reg-input-passwd"
-              labelText="Password"
-              type="password"
-              id="reg-input-passwd"
-              placeholder="Password..."
-            />
-          </div> */}
-
-      {/* <div className="my-input-button">
+      <div className="home-image">
+        <img src={yatzy} alt="yatzy" width="90%" />
+      </div>
+      <div className="home-text">
+        <div className="home-text-div">
+          <h1>Have a game of Yatzy!</h1>
+          <h2>Roll the dice and see what happens.</h2>
+          <MyButton
+            className="my-btn my-btn-filled"
+            type="button"
+            children="Play now!"
+            style={{ marginTop: "24px", width: "33%", height: "8vh" }}
+            onClick={() => navigate("/play")}
+          />
+          <p style={{ paddingTop: "24px" }}>
+            Or{" "}
             <MyButton
-              className="my-btn my-btn-filled"
-              children="Register"
-              type="submit"
-            />
-          </div>
-        </form>
-      </div> */}
+              className="my-btn my-btn-text"
+              children="log in"
+              onClick={() => navigate("/login")}
+            />{" "}
+            to save your scores!
+          </p>
+        </div>
+      </div>
     </section>
   );
 };

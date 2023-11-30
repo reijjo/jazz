@@ -9,6 +9,7 @@ type Props = {
   style?: CSSProperties;
   id?: string;
   placeholder?: string;
+  autoComplete?: string;
 };
 
 const MyInput = ({
@@ -20,6 +21,7 @@ const MyInput = ({
   style,
   id,
   placeholder,
+  autoComplete,
 }: Props) => {
   return (
     <div className={className}>
@@ -30,6 +32,7 @@ const MyInput = ({
         style={style}
         id={id}
         placeholder={placeholder}
+        autoComplete={autoComplete}
       />
     </div>
   );

@@ -34,7 +34,7 @@ font-family: 'Roboto Mono', monospace;
 font-family: 'Walter Turncoat', cursive; */
 
 body {
-  font-size: 16px;
+  font-size: 18px;
   font-family: "Alegreya", serif;
   font-weight: 500;
   background-color: var(--BG);
@@ -42,7 +42,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* background-position: center; */
+  background-position: center;
   color: var(--TEXT);
 }
 
@@ -67,10 +67,15 @@ h1 {
   background-position: center;
 } */
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Navbar & Footer */
 
 nav {
-  height: 8vh;
+  height: 10vh;
   width: 100%;
   position: fixed;
   top: 0;
@@ -79,7 +84,25 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  /* background-color: rgba(0, 0, 0, 0.2); */
+}
+
+.nav-center {
+  /* height: 100%; */
+  background-color: var(--BG);
+  width: 33%;
+  min-width: 450px;
+  padding: 8px 16px;
+  border: 2px inset var(--WHITE);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-links:hover {
+  color: var(--SECONDARY);
 }
 
 /* END Navbar & Footer */
@@ -94,7 +117,7 @@ section {
 }
 
 form {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   width: 100%;
   height: auto;
   display: flex;
@@ -122,13 +145,14 @@ form {
   background-color: var(--PRIMARY3);
   border: 2px solid var(--TEXT);
   color: var(--TEXT);
+  box-shadow: -1px 1px 2px 0 var(--SECONDARY);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .my-btn-filled:hover {
   background-color: var(--SECONDARY);
   color: var(--WHITE);
-  box-shadow: -2px 2px 8px 0px rgba(232, 72, 44, 0.9);
+  box-shadow: -2px 2px 4px 0px rgba(232, 72, 44, 0.9);
 }
 
 .my-btn-outline {
@@ -146,7 +170,7 @@ form {
   background-color: transparent;
   border: none;
   border-radius: 0;
-  padding: 0;
+  padding: 0 2px;
   color: var(--SECONDARY);
   border-bottom: 2px solid var(--SECONDARY);
   outline: none;
