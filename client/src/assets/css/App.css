@@ -48,12 +48,13 @@
   align-items: center;
   background-color: var(--BG);
   width: max-content;
-  height: 60vh;
+  height: min-content;
   box-shadow: -1px 1px 4px 0 var(--SECONDARY);
 }
 
 .register h2,
 .login h2 {
+  margin-bottom: 16px;
   font-size: 2rem;
   color: var(--TEXT);
   /* text-shadow: -1px 0 var(--SECONDARY2), 0 1px var(--SECONDARY2),
@@ -109,7 +110,7 @@
 }
 
 .my-input-button button {
-  margin-top: 8px;
+  margin: 16px 0;
   padding: 8px;
   width: 100%;
   border-radius: 8px;

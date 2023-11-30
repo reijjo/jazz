@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties, ChangeEventHandler } from "react";
 
 type Props = {
   className?: string;
@@ -8,8 +8,12 @@ type Props = {
   inputClassName?: string;
   style?: CSSProperties;
   id?: string;
+  name?: string;
   placeholder?: string;
   autoComplete?: string;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const MyInput = ({
@@ -20,8 +24,11 @@ const MyInput = ({
   inputClassName,
   style,
   id,
+  name,
   placeholder,
   autoComplete,
+  value,
+  onChange,
 }: Props) => {
   return (
     <div className={className}>
@@ -31,8 +38,11 @@ const MyInput = ({
         className={inputClassName}
         style={style}
         id={id}
+        name={name}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
