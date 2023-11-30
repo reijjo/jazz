@@ -15,12 +15,10 @@
 - `npm install typescript --save-dev`
 - add to _package.json_:
 
-```.json
-	// ...
-  "scripts": {
-    "tsc": "tsc"
-  },
-	// ...
+```json
+	"scripts": {
+    "tsc": "tsc",
+  }
 ```
 
 - `npm run tsc -- --init` makes _tsconfig.json_ file
@@ -48,18 +46,16 @@
 - `npm install --save-dev ts-node-dev`
 - add to _package.json_:
 
-```
-	// ...
+```json
 	"scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts",
   }
-	// ...
 ```
 
 ## Create _index.ts_ file
 
-- `touch index.ts` add to _index.ts_:
+- `touch index.ts` and add to _index.ts_:
 
 ```ts
 import express from "express";
