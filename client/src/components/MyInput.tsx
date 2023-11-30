@@ -27,7 +27,7 @@ const MyInput = ({
   name,
   placeholder,
   autoComplete,
-  value,
+  value = "",
   onChange,
 }: Props) => {
   return (

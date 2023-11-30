@@ -44,6 +44,7 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
   };
 
   console.log("Register Input", regInput);
+  console.log("login input", loginInput);
 
   return (
     <section id="sign">
@@ -55,10 +56,11 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
               {/* Username / Email input */}
               <MyInput
                 className="my-input"
-                htmlFor="log-input-username"
+                htmlFor="log-input-user"
                 labelText="Username / Email"
                 type="text"
-                id="log-input-username"
+                id="log-input-user"
+                name="user"
                 placeholder="Username / Email"
                 value={loginInput.user}
                 onChange={handleLoginInput}
@@ -71,6 +73,7 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 labelText="Password"
                 type="password"
                 id="log-input-passwd"
+                name="passwd"
                 placeholder="Password"
                 autoComplete="off"
                 value={loginInput.passwd}
@@ -111,6 +114,7 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 id="reg-input-username"
                 name="username"
                 placeholder="Username..."
+                autoComplete="off"
                 value={regInput.username}
                 onChange={handleRegInput}
               />
@@ -124,6 +128,7 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 id="reg-input-email"
                 name="email"
                 placeholder="Email..."
+                autoComplete="off"
                 onChange={handleRegInput}
               />
 

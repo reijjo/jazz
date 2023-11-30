@@ -1,6 +1,6 @@
 # TypeScript Backend
 
-## Init folder & add .gitignore
+## Init folder & add _.gitignore_
 
 - `mkdir server` `cd server` `npm init -y`
 - `touch .gitignore` add to _.gitignore_:
@@ -8,6 +8,7 @@
 ```
 **/node_modules
 **/.DS_Store
+**/.env
 ```
 
 ## Init TypeScript
