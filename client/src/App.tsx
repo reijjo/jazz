@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Homepage from "./pages/Homepage";
 import Navbar from "./components/Navbar";
 import Sign from "./pages/Sign";
-import usersApi from "./api/usersAPI";
+import userApi from "./api/userApi";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -12,7 +12,7 @@ const App = () => {
   // Get all users just to see that backend works
   useEffect(() => {
     const getUsers = async () => {
-      const allUsers = await usersApi.getAllUsers();
+      const allUsers = await userApi.getAllUsers();
       console.log("All Users", allUsers);
     };
 

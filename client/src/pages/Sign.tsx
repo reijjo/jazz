@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from "react";
 
 import { RegisterInfo, LoginInfo } from "../utils/types";
 
@@ -43,9 +49,20 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
     }));
   };
 
-  console.log("Register Input", regInput);
-  console.log("login input", loginInput);
+  // Register user
+  const registerUser = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
+    const newUser: RegisterInfo = {
+      username: regInput.username,
+      email: regInput.email,
+      passwd: regInput.passwd,
+      passwd2: regInput.passwd2,
+    };
+    console.log("New User", newUser);
+  };
+
+  // Return
   return (
     <section id="sign">
       {isLogin ? (
@@ -103,7 +120,7 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
       ) : (
         <div className="register">
           <h2>Register</h2>
-          <form className="form-register">
+          <form className="form-register" onSubmit={registerUser}>
             <div className="register-inputs">
               {/* Username input */}
               <MyInput
