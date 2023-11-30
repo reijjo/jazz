@@ -16,9 +16,9 @@
 - add to _package.json_:
 
 ```json
-	"scripts": {
-    "tsc": "tsc",
-  }
+"scripts": {
+  "tsc": "tsc",
+}
 ```
 
 - `npm run tsc -- --init` makes _tsconfig.json_ file
@@ -47,10 +47,10 @@
 - add to _package.json_:
 
 ```json
-	"scripts": {
-    "tsc": "tsc",
-    "dev": "ts-node-dev index.ts",
-  }
+"scripts": {
+  "tsc": "tsc",
+  "dev": "ts-node-dev index.ts",
+}
 ```
 
 ## Create _index.ts_ file
