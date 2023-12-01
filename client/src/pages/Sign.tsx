@@ -6,10 +6,19 @@ import {
   useState,
 } from "react";
 
-import { RegisterInfo, LoginInfo } from "../utils/types";
+import {
+  RegisterInfo,
+  LoginInfo,
+  InfoMsg,
+  RegisterFocus,
+  FormErrors,
+} from "../utils/types";
 
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
+import InfoMessage from "../components/InfoMessage";
+import usersApi from "../api/userApi";
+import { errorMsgFunc, infoMsgFunc } from "../utils/helpers";
 
 type Props = {
   isLogin: boolean;
@@ -29,6 +38,18 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
     passwd: "",
   });
 
+  const [infoMessage, setInfoMessage] = useState<InfoMsg>({
+    message: "",
+    style: "",
+  });
+
+  const [registerFocus, setRegisterFocus] = useState<RegisterFocus>({
+    username: false,
+    email: false,
+    passwd: false,
+    passwd2: false,
+  });
+
   // Register Input
   const handleRegInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -37,6 +58,72 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
       ...data,
       [name]: value,
     }));
+
+    // Checks if input is valid
+    // Username check
+    if (name === "username") {
+      const usernameValidMsg = !/^[A-Za-z0-9-_.]+$/.test(value)
+        ? "Only letters, numbers and -_. allowed"
+        : null;
+      const usernameLenMsg =
+        value.length < 3 || value.length > 20 ? "3-20 characters." : null;
+
+      setNotValid((prevErrors) => ({
+        ...prevErrors,
+        username: { len: usernameLenMsg, valid: usernameValidMsg },
+      }));
+    }
+
+    // Email check
+    else if (name === "email") {
+      const emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      const emailLenMsg =
+        value.length > 60 ? "Max 60 characters on email." : null;
+      const emailValidMsg = !emailRegex.test(value)
+        ? "That is not a legit email."
+        : null;
+
+      setNotValid((prevErrors) => ({
+        ...prevErrors,
+        email: { len: emailLenMsg, valid: emailValidMsg },
+      }));
+    }
+
+    // Password check
+    else if (name === "passwd") {
+      const pwLenMsg =
+        value.length < 8 || value.length > 30 ? "8-30 characters." : null;
+      const pwNumMsg = !/\d/.test(value) ? "At least one number." : null;
+      const pwCapitalMsg = !/[A-Z]/.test(value)
+        ? "At least one Uppercase letter."
+        : null;
+      const pwSpecialMsg = !/[!._\-@#*$]/.test(value)
+        ? "At least one special character !._-@#*$"
+        : null;
+
+      setNotValid((prevErrors) => ({
+        ...prevErrors,
+        passwd: {
+          len: pwLenMsg,
+          num: pwNumMsg,
+          capital: pwCapitalMsg,
+          special: pwSpecialMsg,
+        },
+      }));
+    }
+
+    // Confirm Password check
+    else if (name === "passwd2") {
+      const pw2Msg =
+        value !== regInput.passwd ? "Passwords doesn't match." : null;
+
+      setNotValid((prevErrors) => ({
+        ...prevErrors,
+        passwd2: {
+          match: pw2Msg,
+        },
+      }));
+    }
   };
 
   // Login Input
@@ -49,17 +136,63 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
     }));
   };
 
+  // Handle register input focus / blur
+  const handleFocusReg = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name } = event.target;
+
+    setRegisterFocus((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+  };
+
+  const handleBlurReg = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name } = event.target;
+
+    setRegisterFocus((prev) => ({
+      ...prev,
+      [name]: false,
+    }));
+  };
+
+  const [notValid, setNotValid] = useState<FormErrors>({
+    username: {
+      len: null,
+      valid: null,
+    },
+    email: {
+      len: null,
+      valid: null,
+    },
+    passwd: {
+      len: null,
+      special: null,
+      capital: null,
+      num: null,
+    },
+    passwd2: {
+      match: null,
+    },
+  });
+
   // Register user
-  const registerUser = (event: FormEvent<HTMLFormElement>) => {
+  const registerUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const newUser: RegisterInfo = {
-      username: regInput.username,
-      email: regInput.email,
-      passwd: regInput.passwd,
-      passwd2: regInput.passwd2,
-    };
-    console.log("New User", newUser);
+    try {
+      const newUser: RegisterInfo = {
+        username: regInput.username,
+        email: regInput.email,
+        passwd: regInput.passwd,
+        passwd2: regInput.passwd2,
+      };
+
+      const res = await usersApi.createUser(newUser);
+      infoMsgFunc(res, setInfoMessage);
+      console.log("res", res);
+    } catch (error: unknown) {
+      errorMsgFunc(error, setInfoMessage, "error");
+    }
   };
 
   // Return
@@ -97,6 +230,12 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 onChange={handleLoginInput}
               />
             </div>
+
+            <InfoMessage
+              message={infoMessage.message}
+              style={infoMessage.style}
+            />
+
             <div className="my-input-button">
               <MyButton
                 className="my-btn my-btn-filled"
@@ -134,7 +273,18 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 autoComplete="off"
                 value={regInput.username}
                 onChange={handleRegInput}
+                onFocus={handleFocusReg}
+                onBlur={handleBlurReg}
               />
+              {registerFocus.username &&
+                (notValid.username.len || notValid.username.valid) && (
+                  <ul>
+                    {notValid.username.len && <li>{notValid.username.len}</li>}
+                    {notValid.username.valid && (
+                      <li>{notValid.username.valid}</li>
+                    )}
+                  </ul>
+                )}
 
               {/* Email input */}
               <MyInput
@@ -146,8 +296,18 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 name="email"
                 placeholder="Email..."
                 autoComplete="off"
+                value={regInput.email}
                 onChange={handleRegInput}
+                onFocus={handleFocusReg}
+                onBlur={handleBlurReg}
               />
+              {registerFocus.email &&
+                (notValid.email.len || notValid.email.valid) && (
+                  <ul>
+                    {notValid.email.len && <li>{notValid.email.len}</li>}
+                    {notValid.email.valid && <li>{notValid.email.valid}</li>}
+                  </ul>
+                )}
 
               {/* Password input */}
               <MyInput
@@ -159,8 +319,27 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 name="passwd"
                 placeholder="Password..."
                 autoComplete="off"
+                value={regInput.passwd}
                 onChange={handleRegInput}
+                onFocus={handleFocusReg}
+                onBlur={handleBlurReg}
               />
+              {registerFocus.passwd &&
+                (notValid.passwd.capital ||
+                  notValid.passwd.len ||
+                  notValid.passwd.num ||
+                  notValid.passwd.special) && (
+                  <ul>
+                    {notValid.passwd.capital && (
+                      <li>{notValid.passwd.capital}</li>
+                    )}
+                    {notValid.passwd.len && <li>{notValid.passwd.len}</li>}
+                    {notValid.passwd.num && <li>{notValid.passwd.num}</li>}
+                    {notValid.passwd.special && (
+                      <li>{notValid.passwd.special}</li>
+                    )}
+                  </ul>
+                )}
 
               {/* Confirm Password input */}
               <MyInput
@@ -172,9 +351,22 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
                 name="passwd2"
                 placeholder="Password again..."
                 autoComplete="off"
+                value={regInput.passwd2}
                 onChange={handleRegInput}
+                onFocus={handleFocusReg}
+                onBlur={handleBlurReg}
               />
+              {registerFocus.passwd2 && notValid.passwd2.match && (
+                <ul>
+                  {notValid.passwd2.match && <li>{notValid.passwd2.match}</li>}
+                </ul>
+              )}
             </div>
+
+            <InfoMessage
+              message={infoMessage.message}
+              style={infoMessage.style}
+            />
 
             <div className="my-input-button">
               <MyButton

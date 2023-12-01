@@ -19,7 +19,6 @@ const App = () => {
     getUsers();
   }, []);
 
-  console.log("islogn", isLogin);
   return (
     <Router>
       {/* <main> */}

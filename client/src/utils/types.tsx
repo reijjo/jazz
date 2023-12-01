@@ -5,7 +5,39 @@ export type RegisterInfo = {
   passwd2: string;
 };
 
+export type RegisterFocus = {
+  username: boolean;
+  email: boolean;
+  passwd: boolean;
+  passwd2: boolean;
+};
+
+export type FormErrors = {
+  username: {
+    len: string | null;
+    valid: string | null;
+  };
+  email: {
+    len: string | null;
+    valid: string | null;
+  };
+  passwd: {
+    len: string | null;
+    special: string | null;
+    capital: string | null;
+    num: string | null;
+  };
+  passwd2: {
+    match: string | null;
+  };
+};
+
 export type LoginInfo = {
   user: string;
   passwd: string;
+};
+
+export type InfoMsg = {
+  style?: string;
+  message?: string | null;
 };

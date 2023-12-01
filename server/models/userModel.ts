@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
   username: String,
   email: String,
   passwd: String,
+  verifycode: String,
 });
 
 userSchema.set("toJSON", {
