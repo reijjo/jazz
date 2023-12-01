@@ -2,7 +2,7 @@
 
 ## Install Jest & SuperTest
 
-- `npm install --save-dev ts-jest @types/jest supertest @types/supertest`
+- `npm install --save-dev jest ts-jest @types/jest supertest @types/supertest`
 
 ## Environment in _package.json_:
 
@@ -19,7 +19,45 @@
 
 ## Jest config
 
+- Create config file `npx ts-jest config:init` and change file name to _jest.config.ts_ and add this to the file:
+
+```
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+// module.exports = {
+//   preset: 'ts-jest',
+//   testEnvironment: 'node',
+// };
+import type { Config } from "@jest/types";
+
+const config: Config.InitialOptions = {
+  preset: "ts-jest",
+  testEnvironment: "node",
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+  },
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  globalTeardown: "<rootDir>/tests/teardown.ts",
+};
+
+export default config;
+```
+
+- make _teardown.ts_ file in the tests folder:
+
+```ts
+module.exports = () => {
+  process.exit(0);
+};
+```
+
 ## Test database
+
+- add test database to .env file:
+
+```
+MONGO_URI=mongodb+srv://...mongodb.net/dbNORMAL?retryWrites=true&w=majority
+TEST_MONGO_URI=mongodb+srv://...mongodb.net/dbTEST?retryWrites=true&w=majority
+```
 
 - add to _config.ts_ or whatever your file is where you have your config
 
@@ -88,4 +126,6 @@ module.exports = () => {
 };
 ```
 
-- And add to _package.json_ in Jest configuration:
+# IMPORTANT
+
+- be sure that your app connects to MongoDB in **app.ts** file not in index.ts etc
