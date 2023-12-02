@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoute";
 import { connectMongo } from "./utils/helpers";
+import authRouter from "./routes/authRoute";
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.get("/ping", (_req: Request, res: Response) => {
   console.log("someone pinged here");
   res.send("pong");
 });
+
 app.use("/users", userRouter);
+app.use("/auth", authRouter);
 
 export { app };

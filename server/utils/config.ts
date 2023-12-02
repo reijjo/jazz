@@ -10,7 +10,10 @@ const MONGO_URI =
     ? process.env.TEST_MONGO_URI
     : process.env.MONGO_URI;
 
+const SECRET = String(process.env.SECRET);
+
 export const config: Config = {
   PORT,
   MONGO_URI,
+  SECRET,
 };

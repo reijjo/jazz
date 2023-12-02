@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs";
 
 import { UserModel } from "../models/userModel";
 import { RegisterInfo } from "../utils/types";
+import isValid from "../utils/validateInput";
 
 // users
 // GET
@@ -26,7 +27,6 @@ export const getAllUsers = async (_req: Request, res: Response) => {
 // Create new user
 export const createUser = async (req: Request, res: Response) => {
   const { username, email, passwd, passwd2 }: RegisterInfo = req.body;
-  console.log("new User", username, email, passwd, passwd2);
 
   // If empty field
   if (!username || !email || !passwd || !passwd2) {
@@ -36,6 +36,28 @@ export const createUser = async (req: Request, res: Response) => {
   }
 
   // Validate inputs
+  const validUsernameNot = isValid.usernameCheck(username);
+  const validEmailNot = isValid.emailCheck(email);
+  const validPasswdNot = isValid.passwdCheck(passwd);
+  const passwdMatchNot = isValid.passwd2Check(passwd, passwd2);
+
+  if (validUsernameNot) {
+    return res
+      .status(400)
+      .json({ message: validUsernameNot.message, info: validUsernameNot.info });
+  } else if (validEmailNot) {
+    return res
+      .status(400)
+      .json({ message: validEmailNot.message, info: validEmailNot.info });
+  } else if (validPasswdNot) {
+    return res
+      .status(400)
+      .json({ message: validPasswdNot.message, info: validPasswdNot.info });
+  } else if (passwdMatchNot) {
+    return res
+      .status(400)
+      .json({ message: passwdMatchNot.message, info: passwdMatchNot.info });
+  }
 
   // Check if username or email already exists
   try {
