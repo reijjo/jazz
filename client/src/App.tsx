@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import Homepage from "./pages/Homepage";
-import Navbar from "./components/Navbar";
-import Sign from "./pages/Sign";
 import userApi from "./api/userApi";
+import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
+import Sign from "./pages/Sign";
+import Lobby from "./pages/Lobby";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
           path="/login"
           element={<Sign isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
+        <Route path="/lobby" element={<Lobby />} />
         <Route path="*" element={<Homepage />} />
       </Routes>
       {/* </main> */}

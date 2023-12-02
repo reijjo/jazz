@@ -23,3 +23,9 @@ export type User = {
   passwd: string;
   verifycode: string;
 };
+
+export type Token = {
+  user: User;
+  iat: number;
+  eat: number;
+};

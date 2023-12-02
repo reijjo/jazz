@@ -214,6 +214,12 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
 
       const res = await authApi.login(user);
       console.log("res", res);
+
+      // Store the token in localStorage for now
+      if (res.token) {
+        localStorage.setItem("yatzy", res.token);
+      }
+
       infoMsgFunc(res, setInfoMessage);
       // setLoginInput({
       //   user: "",

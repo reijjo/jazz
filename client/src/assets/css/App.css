@@ -32,7 +32,8 @@
 
 /* Sign page */
 
-#sign {
+#sign,
+#lobby {
   padding-top: 10vh;
   justify-content: center;
 }
