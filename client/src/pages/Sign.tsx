@@ -19,6 +19,7 @@ import MyButton from "../components/MyButton";
 import InfoMessage from "../components/InfoMessage";
 import usersApi from "../api/userApi";
 import { errorMsgFunc, infoMsgFunc } from "../utils/helpers";
+import authApi from "../api/authApi";
 
 type Props = {
   isLogin: boolean;
@@ -189,7 +190,35 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
 
       const res = await usersApi.createUser(newUser);
       infoMsgFunc(res, setInfoMessage);
+      setRegInput({
+        username: "",
+        email: "",
+        passwd: "",
+        passwd2: "",
+      });
       console.log("res", res);
+    } catch (error: unknown) {
+      errorMsgFunc(error, setInfoMessage, "error");
+    }
+  };
+
+  // Login user
+  const loginUser = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const user: LoginInfo = {
+        user: loginInput.user,
+        passwd: loginInput.passwd,
+      };
+
+      const res = await authApi.login(user);
+      console.log("res", res);
+      infoMsgFunc(res, setInfoMessage);
+      // setLoginInput({
+      //   user: "",
+      //   passwd: "",
+      // });
     } catch (error: unknown) {
       errorMsgFunc(error, setInfoMessage, "error");
     }
@@ -201,7 +230,7 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
       {isLogin ? (
         <div className="login">
           <h2>Login</h2>
-          <form className="form-login">
+          <form className="form-login" onSubmit={loginUser}>
             <div className="login-inputs">
               {/* Username / Email input */}
               <MyInput
