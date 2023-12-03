@@ -12,15 +12,16 @@ const baseUrl = "http://localhost:3001/users";
 //     Authorization: `Bearer ${localStorage.getItem("yatzy")}`,
 //   },
 // });
+// const res = await withToken.get("/");
 
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem("yatzy")}` },
-};
+// const config = {
+//   headers: { Authorization: `Bearer ${localStorage.getItem("yatzy")}` },
+// };
 
 const getAllUsers = async () => {
   try {
-    const res = await axios.get(`${baseUrl}`, config);
-    // const res = await withToken.get("/");
+    const res = await axios.get(`${baseUrl}`);
+    // const res = await axios.get(`${baseUrl}`, config);
     return res.data;
   } catch (error: unknown) {
     if (isAxiosError(error)) {

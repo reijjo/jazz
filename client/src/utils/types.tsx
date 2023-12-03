@@ -41,3 +41,11 @@ export type InfoMsg = {
   style?: string;
   message?: string | null;
 };
+
+export type User = {
+  id: string;
+  username: string;
+  email: string;
+  passwd: string;
+  verifycode: string;
+};

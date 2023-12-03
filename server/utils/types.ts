@@ -24,8 +24,16 @@ export type User = {
   verifycode: string;
 };
 
+export type SafeUser = {
+  id: string;
+  username: string;
+  email: string;
+};
+
 export type Token = {
-  user: User;
+  id: string;
+  username: string;
+  email: string;
   iat: number;
   eat: number;
 };

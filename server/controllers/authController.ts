@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { LoginInfo, User } from "../utils/types";
 import { UserModel } from "../models/userModel";
 import { config } from "../utils/config";
+import { AuthRequest } from "../utils/middleware";
 
 // auth/login
 // POST
@@ -60,5 +61,33 @@ export const login = async (req: Request, res: Response) => {
 
   return res
     .status(200)
-    .json({ token, message: `Logged in!`, info: "success" });
+    .json({ token, loginUser, message: `Logged in!`, info: "success" });
+};
+
+// auth/orization
+// GET
+// Verify token once again
+export const authorization = async (req: AuthRequest, res: Response) => {
+  console.log("req.user", req.user);
+
+  try {
+    console.log("eka");
+    const user = await UserModel.findById(req.user.id)
+      .select("-passwd")
+      .select("-verifycode");
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found.", info: "error" });
+    }
+
+    return res
+      .status(200)
+      .json({ user, message: `Hello ${user.username}.`, info: "success" });
+  } catch (error: unknown) {
+    return res
+      .status(500)
+      .send({ message: "My bad! Server error.", info: "error" });
+  }
 };

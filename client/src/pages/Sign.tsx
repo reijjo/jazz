@@ -12,6 +12,7 @@ import {
   InfoMsg,
   RegisterFocus,
   FormErrors,
+  User,
 } from "../utils/types";
 
 import MyInput from "../components/MyInput";
@@ -20,13 +21,16 @@ import InfoMessage from "../components/InfoMessage";
 import usersApi from "../api/userApi";
 import { errorMsgFunc, infoMsgFunc } from "../utils/helpers";
 import authApi from "../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   isLogin: boolean;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
+  // user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
 };
 
-const Sign = ({ isLogin, setIsLogin }: Props) => {
+const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
   const [regInput, setRegInput] = useState<RegisterInfo>({
     username: "",
     email: "",
@@ -176,6 +180,8 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
     },
   });
 
+  const navigate = useNavigate();
+
   // Register user
   const registerUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -220,11 +226,16 @@ const Sign = ({ isLogin, setIsLogin }: Props) => {
         localStorage.setItem("yatzy", res.token);
       }
 
+      if (res.loginUser) {
+        setUser(res.loginUser);
+      }
+
       infoMsgFunc(res, setInfoMessage);
-      // setLoginInput({
-      //   user: "",
-      //   passwd: "",
-      // });
+      setLoginInput({
+        user: "",
+        passwd: "",
+      });
+      navigate("/lobby");
     } catch (error: unknown) {
       errorMsgFunc(error, setInfoMessage, "error");
     }

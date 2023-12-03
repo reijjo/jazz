@@ -109,3 +109,27 @@ export const createUser = async (req: Request, res: Response) => {
       .json({ message: "Error creating user.", info: "error" });
   }
 };
+
+// users/:id
+// GET
+// Get user by ID
+// export const getUser = async (req: Request, res: Response) => {
+//   try {
+//     const user = await UserModel.findById(req.user.id)
+//       .select("-passwd")
+//       .select("-verifycode");
+//     if (!user) {
+//       return res
+//         .status(404)
+//         .json({ message: "User not found.", info: "error" });
+//     }
+
+//     return res
+//       .status(200)
+//       .json({ user, message: `Hello ${user.username}.`, info: "success" });
+//   } catch (error: unknown) {
+//     return res
+//       .status(500)
+//       .send({ message: "My bad! Server error.", info: "error" });
+//   }
+// };
