@@ -22,25 +22,39 @@ const App = () => {
   // // See if user is logged in
   useEffect(() => {
     const checkAuth = async () => {
-      try {
-        const valid = await authApi.authorization();
-        if (valid && valid.user) {
-          setUser(valid.user);
-        } else {
-          console.log("localStorage cleared");
-          localStorage.removeItem("yatzy");
-          setUser(null);
-        }
+      // Get token from localStorage
+      const token = localStorage.getItem("yatzy");
 
-        console.log("valid", valid);
+      if (!token) {
+        setUser(null);
+        localStorage.clear();
+      }
+
+      try {
+        if (token) {
+          const res = await authApi.authorization(token);
+          console.log("res", res);
+
+          const validUser = res.user;
+
+          if (validUser) {
+            setUser(validUser);
+          } else {
+            setUser(null);
+            localStorage.clear();
+          }
+        }
       } catch (error: unknown) {
+        localStorage.clear();
+        setUser(null);
         if (isAxiosError(error)) {
-          console.log(error.response?.data.message);
+          console.log(error.response?.data);
         } else {
-          console.log("err", error);
+          console.error("Error checking token", error);
         }
       }
     };
+
     checkAuth();
   }, [setUser]);
 
@@ -74,7 +88,6 @@ const App = () => {
         <Route
           path="/lobby"
           element={<Lobby user={user} setUser={setUser} />}
-          // element={<Lobby />}
         />
         <Route path="*" element={<Homepage />} />
       </Routes>

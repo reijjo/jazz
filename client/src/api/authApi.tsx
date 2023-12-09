@@ -3,17 +3,17 @@ import { LoginInfo } from "../utils/types";
 
 const baseUrl = "http://localhost:3001/auth";
 
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem("yatzy")}` },
-};
-
 const login = async (user: LoginInfo) => {
   const res = await axios.post(`${baseUrl}/login`, user);
   return res.data;
 };
 
-const authorization = async () => {
-  const res = await axios.get(`${baseUrl}/orization`, config);
+const authorization = async (token: string | null) => {
+  const res = await axios.get(`${baseUrl}/orization`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 

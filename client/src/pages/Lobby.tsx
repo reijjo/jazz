@@ -16,33 +16,47 @@ const Lobby = ({ user, setUser }: Props) => {
 
   // See if user is logged in
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkToken = async () => {
+      // Get token from localstorage
+      const token = localStorage.getItem("yatzy");
+
+      if (!token) {
+        console.log("No token found.");
+        setUser(null);
+        localStorage.removeItem("how");
+        navigate("/");
+      }
+
       try {
-        const valid = await authApi.authorization();
+        if (token) {
+          const res = await authApi.authorization(token);
 
-        if (valid && valid.user) {
-          setUser(valid.user);
+          const validUser = res.user;
 
-          console.log("WHAT IS VALID?", valid);
-        } else {
-          localStorage.removeItem("yatzy");
-          console.log("localStorage cleared.");
-          setUser(null);
-          console.log("not valid", valid);
+          if (validUser) {
+            setUser(validUser);
+          } else {
+            setUser(null);
+            localStorage.clear();
+            navigate("/");
+          }
         }
       } catch (error: unknown) {
-        if (isAxiosError(error)) {
-          console.log(error.response?.data.message);
-        } else {
-          console.log("err", error);
-        }
+        localStorage.clear();
+        setUser(null);
+        navigate("/");
 
-        // navigate("/");
+        if (isAxiosError(error)) {
+          console.log(error.response?.data);
+        } else {
+          console.error("Error checking token", error);
+        }
       } finally {
         setIsLoading(false);
       }
     };
-    checkAuth();
+
+    checkToken();
   }, [setUser, navigate]);
 
   if (isLoading) {
