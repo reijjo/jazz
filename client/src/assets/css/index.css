@@ -84,6 +84,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
   /* background-color: rgba(0, 0, 0, 0.2); */
 }
 
@@ -180,6 +181,14 @@ li {
 
 .my-btn-outline:hover {
   box-shadow: -4px 4px 16px 0px rgba(232, 72, 44, 0.9);
+}
+
+.extra-outline {
+  background-color: var(--PRIMARY2);
+  color: var(--WHITE);
+  font-family: "Walter Turncoat", cursive;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .my-btn-text {

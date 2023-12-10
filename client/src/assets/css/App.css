@@ -33,7 +33,8 @@
 /* Sign page */
 
 #sign,
-#lobby {
+#lobby,
+#play {
   padding-top: 10vh;
   justify-content: center;
 }
@@ -68,6 +69,205 @@
   height: 100%;
   justify-content: space-around;
   align-items: center;
+}
+
+/* Play */
+
+.the-game {
+  border: 4px solid var(--TEXT);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  /* height: 75vh; */
+  max-height: 1000px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(40px 1fr));
+  grid-auto-rows: minmax(50px, auto);
+  /* GLASS */
+  backdrop-filter: blur(16px);
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: -1px 1px 4px 0 var(--SECONDARY);
+}
+
+.game-header {
+  display: grid;
+  place-items: center;
+}
+
+.game-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--PRIMARY);
+}
+
+.game-row:nth-child(even) {
+  background-color: var(--BG);
+}
+
+.game-row:nth-child(odd) {
+  background-color: var(--BG2);
+}
+
+.game-section {
+  border-right: 1px solid var(--PRIMARY);
+  display: grid;
+  /* place-items: center; */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.game-section:last-child {
+  border: none;
+}
+
+.game-section > div {
+  /* border: 1px solid red; */
+  display: grid;
+  place-items: center;
+}
+
+.game-pisteet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-pisteet > button {
+  border: 2px inset var(--WHITE);
+  border-radius: 8px;
+  height: 90%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Walter Turncoat", cursive;
+}
+
+/* .game-pisteet kun arvo annettu {
+  border: "2px solid var(--SECONDARY2)";
+  background-color: "var(--SECONDARY)";
+  color: "white";
+}
+
+.game-pisteet valittu {
+  border: "2px solid var(--PRIMARY)";
+  box-shadow: "-1px 1px 0px var(--SECONDARY)";
+} */
+
+.game-kuva-div {
+  height: 100%;
+  max-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+}
+
+.game-kuva-div img {
+  /* border: 1px solid blue; */
+  object-fit: cover;
+}
+
+.game-ohje-div {
+  /* border: 1px solid black; */
+  height: 100%;
+  width: 100%;
+  max-height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+}
+
+.game-ohje-div img {
+  margin: 0 4px;
+  transform: translateY(1px);
+}
+
+.game-ohje-div img:hover {
+  cursor: pointer;
+}
+
+.too-many-dices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.too-many-dices > div {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-dices {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  place-items: center;
+  /* border: 1px solid black; */
+  margin: 16px 32px;
+  /* width: 100%; */
+}
+
+.game-dices > div {
+  display: grid;
+  /* border: 1px solid orange; */
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+}
+
+.dice > button {
+  border: 2px solid var(--TEXT);
+  border-radius: 12px;
+  background-color: var(--BG);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  aspect-ratio: 1/1;
+  font-family: "Walter Turncoat", cursive;
+  font-size: 1.2rem;
+}
+
+.dice > button:hover {
+  cursor: pointer;
+  background-color: var(--BG2);
+}
+
+.dice-selected {
+  border: 2px solid var(--SECONDARY2);
+  background-color: var(--SECONDARY) !important;
+  color: white;
+}
+
+.game-button {
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  /* border: 1px solid salmon; */
+  min-height: 50px;
+}
+
+.game-button > button {
+  height: 100%;
+  width: 80%;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.game-button > button:hover {
+  cursor: pointer;
 }
 
 /* my-input */

@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import Sign from "./pages/Sign";
 import Lobby from "./pages/Lobby";
+import Play from "./pages/Play";
 import { User } from "./utils/types";
 import authApi from "./api/authApi";
 import { isAxiosError } from "axios";
@@ -19,7 +20,7 @@ const App = () => {
 
   console.log("USER", user);
 
-  // // See if user is logged in
+  // See if user is logged in
   useEffect(() => {
     const checkAuth = async () => {
       // Get token from localStorage
@@ -85,6 +86,7 @@ const App = () => {
             />
           }
         />
+        <Route path="/play" element={<Play />} />
         <Route
           path="/lobby"
           element={<Lobby user={user} setUser={setUser} />}

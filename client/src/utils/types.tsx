@@ -49,3 +49,12 @@ export type User = {
   passwd: string;
   verifycode: string;
 };
+
+// THE GAME
+export type HoldDice = {
+  dice1: boolean;
+  dice2: boolean;
+  dice3: boolean;
+  dice4: boolean;
+  dice5: boolean;
+};
