@@ -89,6 +89,7 @@
   backdrop-filter: blur(16px);
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: -1px 1px 4px 0 var(--SECONDARY);
+  position: relative;
 }
 
 .game-header {
@@ -258,15 +259,55 @@
   min-height: 50px;
 }
 
-.game-button > button {
+.long-button-div,
+.short-button-div {
   height: 100%;
   width: 80%;
-  padding: 8px;
-  border-radius: 8px;
   font-size: 1.1rem;
 }
 
-.game-button > button:hover {
+.long-button-div {
+  position: relative;
+}
+
+.long-button {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.short-button-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.short-roll {
+  width: 45%;
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.short-button1 {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.short-button {
+  width: 45%;
+  height: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.long-button:hover,
+.short-button:hover,
+.short-button1:hover {
   cursor: pointer;
 }
 

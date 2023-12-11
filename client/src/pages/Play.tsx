@@ -5,10 +5,12 @@ import dice4 from "../assets/images/icons/icons8-dice-four-64.png";
 import dice5 from "../assets/images/icons/icons8-dice-five-64.png";
 import dice6 from "../assets/images/icons/icons8-dice-six-64.png";
 import info from "../assets/images/icons/icons8-info-50.png";
+import WhatToDo from "../components/WhatToDo";
 
 import { useState } from "react";
 
 import { HoldDice } from "../utils/types";
+import { infofields } from "../utils/helpers";
 
 const Play = () => {
   const [holdDice, setHoldDice] = useState<HoldDice>({
@@ -27,6 +29,24 @@ const Play = () => {
     dice5: Math.floor(Math.random() * 6) + 1,
   });
 
+  // For instructions
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoverInfos, setHoverInfos] = useState({
+    header: "",
+    children: "",
+  });
+
+  const [rolls, setRolls] = useState<number>(3);
+
+  const handleHover = (header: string, children: string) => {
+    setHoverInfos({ header: header, children: children });
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   // To hold the dices
   const handleDiceClick = (diceId: keyof HoldDice) => {
     console.log("diceId", diceId);
@@ -41,19 +61,29 @@ const Play = () => {
   // To roll the dices
   const handleDiceRoll = () => {
     // Just roll the unheld dices
-    const newValues = { ...diceValues };
-    Object.keys(newValues).forEach((diceId) => {
-      if (!holdDice[diceId as keyof HoldDice]) {
-        newValues[diceId as keyof HoldDice] = Math.floor(Math.random() * 6) + 1;
-      }
-    });
+    if (rolls > 0) {
+      const newValues = { ...diceValues };
+      Object.keys(newValues).forEach((diceId) => {
+        if (!holdDice[diceId as keyof HoldDice]) {
+          newValues[diceId as keyof HoldDice] =
+            Math.floor(Math.random() * 6) + 1;
+        }
+      });
 
-    setDiceValues(newValues);
+      setDiceValues(newValues);
+
+      setRolls(rolls - 1);
+    }
   };
+
+  // console.log(infofields);
 
   // Return
   return (
     <section id="play">
+      {isHovered && hoverInfos && (
+        <WhatToDo header={hoverInfos.header} children={hoverInfos.children} />
+      )}
       <div className="the-game">
         <div className="game-header">
           <h2>nimi points</h2>
@@ -74,7 +104,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Ones</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.ones.header,
+                      infofields.ones.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -92,7 +133,18 @@ const Play = () => {
             <div className="game-ohje">
               <div className="game-ohje-div">
                 <div>Pair</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.pair.header,
+                      infofields.pair.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -114,7 +166,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Twos</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.twos.header,
+                      infofields.twos.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -141,7 +204,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Pair x2</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.pair2.header,
+                      infofields.pair2.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -163,7 +237,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Threes</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.threes.header,
+                      infofields.threes.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -187,7 +272,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Same x3</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.same3.header,
+                      infofields.same3.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -209,7 +305,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Fours</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.fours.header,
+                      infofields.fours.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -236,7 +343,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Same x4</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.same4.header,
+                      infofields.same4.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -258,7 +376,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Fives</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.fives.header,
+                      infofields.fives.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -286,7 +415,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Straight 1-5</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.straight15.header,
+                      infofields.straight15.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -308,7 +448,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Sixes</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.sixes.header,
+                      infofields.sixes.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -336,7 +487,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Straight 2-6</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.straight26.header,
+                      infofields.straight26.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -369,7 +531,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Full House</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.fullhouse.header,
+                      infofields.fullhouse.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -389,7 +562,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Subtotal</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.subtotal.header,
+                      infofields.subtotal.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -405,7 +589,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Chance</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.chance.header,
+                      infofields.chance.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -425,7 +620,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>+35 points</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.bonus.header,
+                      infofields.bonus.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -453,7 +659,18 @@ const Play = () => {
               {" "}
               <div className="game-ohje-div">
                 <div>Yatzy</div>
-                <img src={info} alt="info" height="50%" />
+                <img
+                  src={info}
+                  alt="info"
+                  height="50%"
+                  onMouseEnter={() =>
+                    handleHover(
+                      infofields.yatzy.header,
+                      infofields.yatzy.children
+                    )
+                  }
+                  onMouseLeave={handleMouseLeave}
+                />
               </div>
             </div>
           </div>
@@ -475,58 +692,76 @@ const Play = () => {
               </button>
             </div>
           ))}
-          {/* <div className="dice">
-            <button id="dice1" type="button" onClick={handleDiceClick}>
-              ...
-            </button>
-          </div>
-          <div className="dice">
-            <button
-              id="dice2"
-              type="button"
-              onClick={() => console.log("dice clicked")}
-            >
-              2
-            </button>
-          </div>
-          <div className="dice">
-            <button
-              id="dice3"
-              type="button"
-              onClick={() => console.log("dice clicked")}
-            >
-              3
-            </button>
-          </div>
-          <div className="dice">
-            <button
-              id="dice4"
-              type="button"
-              onClick={() => console.log("dice clicked")}
-            >
-              4
-            </button>
-          </div>
-          <div className="dice">
-            <button
-              id="dice5"
-              type="button"
-              onClick={() => console.log("dice clicked")}
-            >
-              5
-            </button>
-          </div> */}
         </div>
 
         {/* Roll button */}
         <div className="game-button">
-          <button
-            className="my-btn-outline extra-outline"
-            type="button"
-            onClick={handleDiceRoll}
-          >
-            <h3>Roll</h3>
-          </button>
+          {rolls === 3 ? (
+            <div className="long-button-div">
+              <button
+                className="my-btn-outline extra-outline long-button"
+                type="button"
+                onClick={handleDiceRoll}
+              >
+                <h3>Roll</h3>
+                <h4
+                  style={{
+                    position: "absolute",
+                    right: "16px",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
+                    color: "var(--TEXT)",
+                    border: "1px solid var(--TEXT)",
+                    borderRadius: "50%",
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "var(--PRIMARY3)", // Set the background color
+                  }}
+                >
+                  {rolls}
+                </h4>
+              </button>
+            </div>
+          ) : (
+            <div className="short-button-div">
+              <div className="short-roll">
+                <button
+                  className="my-btn-outline extra-outline short-button1"
+                  onClick={handleDiceRoll}
+                >
+                  <h3>Roll</h3>
+                </button>
+                <h5
+                  style={{
+                    position: "absolute",
+                    right: "16px",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
+                    color: "var(--TEXT)",
+                    border: "1px solid var(--TEXT)",
+                    borderRadius: "50%",
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "var(--PRIMARY3)", // Set the background color
+                  }}
+                >
+                  {rolls}
+                </h5>
+              </div>
+              <button
+                className="my-btn-outline extra-outline short-button"
+                style={{ backgroundColor: "var(--PRIMARY)" }}
+              >
+                <h3>Set</h3>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
