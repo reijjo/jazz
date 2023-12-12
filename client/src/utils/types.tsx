@@ -58,3 +58,40 @@ export type HoldDice = {
   dice4: boolean;
   dice5: boolean;
 };
+
+export type HoldPoints = {
+  ones: boolean;
+  twos: boolean;
+  threes: boolean;
+  fours: boolean;
+  fives: boolean;
+  sixes: boolean;
+  pair: boolean;
+  pair2: boolean;
+  same3: boolean;
+  same4: boolean;
+  straight15: boolean;
+  straight26: boolean;
+  fullhouse: boolean;
+  chance: boolean;
+  yatzy: boolean;
+};
+
+export type LockPoints = {
+  ones?: number;
+  twos?: number;
+  threes?: number;
+  fours?: number;
+  fives?: number;
+  sixes?: number;
+  bonus?: number; // Minor table ends
+  pair?: number;
+  pair2?: number;
+  same3?: number;
+  same4?: number;
+  straight15?: number;
+  straight26?: number;
+  fullhouse?: number;
+  chance?: number;
+  yatzy?: number;
+};

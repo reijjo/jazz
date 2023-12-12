@@ -14,7 +14,7 @@ const Homepage = () => {
       <div className="home-text">
         <div className="home-text-div">
           <h1>Have a game of Yatzy!</h1>
-          <h2>Roll the dice and see what happens.</h2>
+          <h2>Roll the dice x 5.</h2>
           <MyButton
             className="my-btn my-btn-filled"
             type="button"

@@ -134,7 +134,9 @@
   align-items: center;
 }
 
-.game-pisteet > button {
+.not-selected,
+.selected,
+.locked {
   border: 2px inset var(--WHITE);
   border-radius: 8px;
   height: 90%;
@@ -143,6 +145,22 @@
   justify-content: center;
   align-items: center;
   font-family: "Walter Turncoat", cursive;
+}
+
+.not-selected:hover {
+  cursor: pointer;
+}
+
+.selected {
+  border: 2px solid var(--PRIMARY);
+  background-color: var(--PRIMARY3);
+}
+
+.locked {
+  border: 2px solid var(--SECONDARY2);
+  background-color: var(--SECONDARY);
+  color: white;
+  font-size: 1.1rem;
 }
 
 /* .game-pisteet kun arvo annettu {
@@ -227,6 +245,10 @@
   min-height: 60px;
 }
 
+.no-dice {
+  background-color: gray;
+}
+
 .dice > button {
   border: 2px solid var(--TEXT);
   border-radius: 12px;
@@ -238,6 +260,15 @@
   aspect-ratio: 1/1;
   font-family: "Walter Turncoat", cursive;
   font-size: 1.2rem;
+}
+
+.dice > button:disabled {
+  background-color: lightgray;
+}
+
+.dice > button:disabled:hover {
+  cursor: default;
+  background-color: lightgray;
 }
 
 .dice > button:hover {
@@ -303,6 +334,17 @@
   height: 100%;
   padding: 8px;
   border-radius: 8px;
+}
+
+.short-button:disabled,
+.short-button1:disabled {
+  background-color: gray !important;
+}
+
+.short-button:disabled:hover,
+.short-button1:disabled:hover {
+  box-shadow: none;
+  cursor: default;
 }
 
 .long-button:hover,
