@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { InfoMsg } from "./types";
+import { HoldDice, InfoMsg } from "./types";
 import { isAxiosError } from "axios";
 
 // Setting info message and cleaning up code
@@ -106,3 +106,50 @@ export const infofields = {
     children: "Get all five dice showing the same number. ",
   },
 };
+
+export const resetHoldDice = (
+  setHoldDice: Dispatch<SetStateAction<HoldDice>>
+) => {
+  setHoldDice({
+    dice1: false,
+    dice2: false,
+    dice3: false,
+    dice4: false,
+    dice5: false,
+  });
+};
+
+// Minor table
+export const ykkoset = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues)
+    .filter((dice) => dice === 1)
+    .reduce((acc, value) => acc + value, 0);
+
+export const kakkoset = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues)
+    .filter((dice) => dice === 2)
+    .reduce((acc, value) => acc + value, 0);
+
+export const kolmoset = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues)
+    .filter((dice) => dice === 3)
+    .reduce((acc, value) => acc + value, 0);
+
+export const neloset = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues)
+    .filter((dice) => dice === 4)
+    .reduce((acc, value) => acc + value, 0);
+
+export const vitoset = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues)
+    .filter((dice) => dice === 5)
+    .reduce((acc, value) => acc + value, 0);
+
+export const kutoset = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues)
+    .filter((dice) => dice === 6)
+    .reduce((acc, value) => acc + value, 0);
+
+// Major table
+export const chance = (diceValues: { [key: string]: number }) =>
+  Object.values(diceValues).reduce((sum, value) => sum + (value || 0), 0);

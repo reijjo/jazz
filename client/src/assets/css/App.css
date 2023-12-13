@@ -163,17 +163,6 @@
   font-size: 1.1rem;
 }
 
-/* .game-pisteet kun arvo annettu {
-  border: "2px solid var(--SECONDARY2)";
-  background-color: "var(--SECONDARY)";
-  color: "white";
-}
-
-.game-pisteet valittu {
-  border: "2px solid var(--PRIMARY)";
-  box-shadow: "-1px 1px 0px var(--SECONDARY)";
-} */
-
 .game-kuva-div {
   height: 100%;
   max-height: 40px;
@@ -290,6 +279,15 @@
   min-height: 50px;
 }
 
+.long-button-div > button:disabled {
+  background-color: lightgray;
+}
+
+.long-button-div > button:disabled:hover {
+  cursor: default;
+  background-color: lightgray;
+}
+
 .long-button-div,
 .short-button-div {
   height: 100%;
@@ -399,4 +397,8 @@
   width: 100%;
   border-radius: 8px;
   /* border: 1px solid var(--SECONDARY); */
+}
+
+.no-pointer:hover {
+  cursor: default;
 }

@@ -7,10 +7,20 @@ import dice6 from "../assets/images/icons/icons8-dice-six-64.png";
 import info from "../assets/images/icons/icons8-info-50.png";
 import WhatToDo from "../components/WhatToDo";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { HoldDice, HoldPoints, LockPoints } from "../utils/types";
-import { infofields } from "../utils/helpers";
+import {
+  infofields,
+  resetHoldDice,
+  ykkoset,
+  kakkoset,
+  kolmoset,
+  neloset,
+  vitoset,
+  kutoset,
+  chance,
+} from "../utils/helpers";
 
 const Play = () => {
   const [holdDice, setHoldDice] = useState<HoldDice>({
@@ -36,7 +46,6 @@ const Play = () => {
     children: "",
   });
 
-  // For points
   const [points, setPoints] = useState<LockPoints>({
     ones: 0 || undefined,
     twos: 0 || undefined,
@@ -57,8 +66,57 @@ const Play = () => {
   });
 
   const [selected, setSelected] = useState<keyof HoldPoints | null>(null);
+  const [locked, setLocked] = useState<HoldPoints>({
+    ones: false,
+    twos: false,
+    threes: false,
+    fours: false,
+    fives: false,
+    sixes: false, // Minor table ends
+    pair: false,
+    pair2: false,
+    same3: false,
+    same4: false,
+    straight15: false,
+    straight26: false,
+    fullhouse: false,
+    chance: false,
+    yatzy: false,
+  });
 
   const [rolls, setRolls] = useState<number>(3);
+  const [gameOver, setGameOver] = useState(false);
+
+  const totalPoints = Object.values(points).reduce(
+    (sum, value) => sum + (value || 0),
+    0
+  );
+
+  const subtotal =
+    (points.ones || 0) +
+    (points.twos || 0) +
+    (points.threes || 0) +
+    (points.fours || 0) +
+    (points.fives || 0) +
+    (points.sixes || 0);
+
+  // When every slot is locked
+  useEffect(() => {
+    if (Object.values(locked).every((value) => value === true)) {
+      console.log("ALL DONE!");
+      setGameOver(true);
+    }
+  }, [locked]);
+
+  // Check for bonus
+  useEffect(() => {
+    if (subtotal >= 63) {
+      setPoints((prevPoints) => ({
+        ...prevPoints,
+        bonus: 50,
+      }));
+    }
+  }, [subtotal]);
 
   const handleHover = (header: string, children: string) => {
     setHoverInfos({ header: header, children: children });
@@ -110,13 +168,105 @@ const Play = () => {
   };
 
   const handleLockPoints = (category: keyof LockPoints) => {
-    if (points[category] === undefined) {
-      setPoints((prevpoints) => ({
-        ...prevpoints,
-        [category]: points || 0,
+    if (selected && points[category] === undefined) {
+      const ykkoset = Object.values(diceValues)
+        .filter((dice) => dice === 1)
+        .reduce((acc, value) => acc + value, 0);
+
+      const kakkoset = Object.values(diceValues)
+        .filter((dice) => dice === 2)
+        .reduce((acc, value) => acc + value, 0);
+
+      const kolmoset = Object.values(diceValues)
+        .filter((dice) => dice === 3)
+        .reduce((acc, value) => acc + value, 0);
+
+      const neloset = Object.values(diceValues)
+        .filter((dice) => dice === 4)
+        .reduce((acc, value) => acc + value, 0);
+
+      const vitoset = Object.values(diceValues)
+        .filter((dice) => dice === 5)
+        .reduce((acc, value) => acc + value, 0);
+
+      const kutoset = Object.values(diceValues)
+        .filter((dice) => dice === 6)
+        .reduce((acc, value) => acc + value, 0);
+
+      const chance = Object.values(diceValues).reduce(
+        (sum, value) => sum + value,
+        0
+      );
+
+      if (category === "ones") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: ykkoset,
+        }));
+      } else if (category === "twos") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: kakkoset,
+        }));
+      } else if (category === "threes") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: kolmoset,
+        }));
+      } else if (category === "fours") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: neloset,
+        }));
+      } else if (category === "fives") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: vitoset,
+        }));
+      } else if (category === "sixes") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: kutoset,
+        }));
+      } else if (category === "chance") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: chance,
+        }));
+      } else {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: points[category] || 0,
+        }));
+      }
+
+      setSelected(null);
+
+      setLocked((prevLocked) => ({
+        ...prevLocked,
+        [category]: true,
       }));
+
+      resetHoldDice(setHoldDice);
+
+      if (!gameOver) {
+        setRolls(3);
+      }
     }
   };
+
+  console.log(
+    "every",
+    Object.values(locked).every((l) => l)
+  );
+
+  console.log("points", points);
+  console.log("sbutota", subtotal);
+
+  console.log(
+    "points sum",
+    Object.values(points).reduce((sum, value) => sum + (value || 0), 0)
+  );
 
   // Return
   return (
@@ -126,7 +276,7 @@ const Play = () => {
       )}
       <div className="the-game">
         <div className="game-header">
-          <h2>Testiukko points</h2>
+          <h2>Testiukko {totalPoints} points</h2>
         </div>
 
         {/* Ones & Pair */}
@@ -139,10 +289,20 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "ones" ? "selected" : "not-selected"}
-                onClick={() => handleHoldPoints("ones")}
+                className={
+                  selected === "ones"
+                    ? "selected"
+                    : locked.ones
+                    ? "locked"
+                    : "not-selected"
+                }
+                onClick={() => {
+                  handleHoldPoints("ones");
+                }}
               >
-                {points.ones || 0}
+                {rolls < 3 && !locked.ones
+                  ? ykkoset(diceValues)
+                  : Number(points.ones) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -174,7 +334,13 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "pair" ? "selected" : "not-selected"}
+                className={
+                  selected === "pair"
+                    ? "selected"
+                    : locked.pair
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("pair")}
               >
                 {points.pair || 0}
@@ -211,10 +377,18 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "twos" ? "selected" : "not-selected"}
+                className={
+                  selected === "twos"
+                    ? "selected"
+                    : locked.twos
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("twos")}
               >
-                {points.twos || 0}
+                {rolls < 3 && !locked.twos
+                  ? kakkoset(diceValues)
+                  : Number(points.twos) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -254,7 +428,13 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "pair2" ? "selected" : "not-selected"}
+                className={
+                  selected === "pair2"
+                    ? "selected"
+                    : locked.pair2
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("pair2")}
               >
                 {points.pair2 || 0}
@@ -292,10 +472,18 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "threes" ? "selected" : "not-selected"}
+                className={
+                  selected === "threes"
+                    ? "selected"
+                    : locked.threes
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("threes")}
               >
-                {points.threes || 0}
+                {rolls < 3 && !locked.threes
+                  ? kolmoset(diceValues)
+                  : Number(points.threes) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -332,7 +520,13 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "same3" ? "selected" : "not-selected"}
+                className={
+                  selected === "same3"
+                    ? "selected"
+                    : locked.same3
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("same3")}
               >
                 {points.same3 || 0}
@@ -370,10 +564,18 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "fours" ? "selected" : "not-selected"}
+                className={
+                  selected === "fours"
+                    ? "selected"
+                    : locked.fours
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("fours")}
               >
-                {points.fours || 0}
+                {rolls < 3 && !locked.fours
+                  ? neloset(diceValues)
+                  : Number(points.fours) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -413,7 +615,13 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "same4" ? "selected" : "not-selected"}
+                className={
+                  selected === "same4"
+                    ? "selected"
+                    : locked.same4
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("same4")}
               >
                 {points.same4 || 0}
@@ -451,10 +659,18 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "fives" ? "selected" : "not-selected"}
+                className={
+                  selected === "fives"
+                    ? "selected"
+                    : locked.fives
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("fives")}
               >
-                {points.fives || 0}
+                {rolls < 3 && !locked.fives
+                  ? vitoset(diceValues)
+                  : Number(points.fives) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -496,7 +712,11 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "straight15" ? "selected" : "not-selected"
+                  selected === "straight15"
+                    ? "selected"
+                    : locked.straight15
+                    ? "locked"
+                    : "not-selected"
                 }
                 onClick={() => handleHoldPoints("straight15")}
               >
@@ -535,10 +755,18 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "sixes" ? "selected" : "not-selected"}
+                className={
+                  selected === "sixes"
+                    ? "selected"
+                    : locked.sixes
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("sixes")}
               >
-                {points.sixes || 0}
+                {rolls < 3 && !locked.sixes
+                  ? kutoset(diceValues)
+                  : Number(points.sixes) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -580,7 +808,11 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "straight26" ? "selected" : "not-selected"
+                  selected === "straight26"
+                    ? "selected"
+                    : locked.straight26
+                    ? "locked"
+                    : "not-selected"
                 }
                 onClick={() => handleHoldPoints("straight26")}
               >
@@ -631,7 +863,11 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "fullhouse" ? "selected" : "not-selected"
+                  selected === "fullhouse"
+                    ? "selected"
+                    : locked.fullhouse
+                    ? "locked"
+                    : "not-selected"
                 }
                 onClick={() => handleHoldPoints("fullhouse")}
               >
@@ -667,7 +903,7 @@ const Play = () => {
               <div className="game-kuva-div">=</div>
             </div>
             <div className="game-pisteet">
-              <button className="not-selected">0</button>
+              <button className="not-selected no-pointer">{subtotal}</button>
             </div>
             <div className="game-ohje">
               {" "}
@@ -695,10 +931,18 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "chance" ? "selected" : "not-selected"}
+                className={
+                  selected === "chance"
+                    ? "selected"
+                    : locked.chance
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("chance")}
               >
-                {points.chance || 0}
+                {rolls < 3 && !locked.chance
+                  ? chance(diceValues)
+                  : Number(points.chance) | 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -730,12 +974,14 @@ const Play = () => {
               <div className="game-kuva-div">Bonus</div>
             </div>
             <div className="game-pisteet">
-              <button className="locked">0</button>
+              <button className="not-selected no-pointer">
+                {points.bonus || 0}
+              </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>+35 points</div>
+                <div>+50 points</div>
                 <img
                   src={info}
                   alt="info"
@@ -770,7 +1016,13 @@ const Play = () => {
             </div>
             <div className="game-pisteet">
               <button
-                className={selected === "yatzy" ? "selected" : "not-selected"}
+                className={
+                  selected === "yatzy"
+                    ? "selected"
+                    : locked.yatzy
+                    ? "locked"
+                    : "not-selected"
+                }
                 onClick={() => handleHoldPoints("yatzy")}
               >
                 {points.yatzy || 0}
@@ -824,6 +1076,7 @@ const Play = () => {
                 className="my-btn-outline extra-outline long-button"
                 type="button"
                 onClick={handleDiceRoll}
+                disabled={gameOver}
               >
                 <h3>Roll</h3>
                 <h4
@@ -880,7 +1133,7 @@ const Play = () => {
               <button
                 className="my-btn-outline extra-outline short-button"
                 style={{ backgroundColor: "var(--PRIMARY)" }}
-                disabled={selected === null}
+                disabled={rolls === 3 || selected === null}
                 onClick={() => handleLockPoints(selected as keyof LockPoints)}
               >
                 <h3>Set</h3>
