@@ -21,6 +21,7 @@ import {
   kutoset,
   chance,
 } from "../utils/helpers";
+import GameRow from "../components/game/GameRow";
 
 const Play = () => {
   const [holdDice, setHoldDice] = useState<HoldDice>({
@@ -169,69 +170,40 @@ const Play = () => {
 
   const handleLockPoints = (category: keyof LockPoints) => {
     if (selected && points[category] === undefined) {
-      const ykkoset = Object.values(diceValues)
-        .filter((dice) => dice === 1)
-        .reduce((acc, value) => acc + value, 0);
-
-      const kakkoset = Object.values(diceValues)
-        .filter((dice) => dice === 2)
-        .reduce((acc, value) => acc + value, 0);
-
-      const kolmoset = Object.values(diceValues)
-        .filter((dice) => dice === 3)
-        .reduce((acc, value) => acc + value, 0);
-
-      const neloset = Object.values(diceValues)
-        .filter((dice) => dice === 4)
-        .reduce((acc, value) => acc + value, 0);
-
-      const vitoset = Object.values(diceValues)
-        .filter((dice) => dice === 5)
-        .reduce((acc, value) => acc + value, 0);
-
-      const kutoset = Object.values(diceValues)
-        .filter((dice) => dice === 6)
-        .reduce((acc, value) => acc + value, 0);
-
-      const chance = Object.values(diceValues).reduce(
-        (sum, value) => sum + value,
-        0
-      );
-
       if (category === "ones") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: ykkoset,
+          [category]: ykkoset(diceValues),
         }));
       } else if (category === "twos") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: kakkoset,
+          [category]: kakkoset(diceValues),
         }));
       } else if (category === "threes") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: kolmoset,
+          [category]: kolmoset(diceValues),
         }));
       } else if (category === "fours") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: neloset,
+          [category]: neloset(diceValues),
         }));
       } else if (category === "fives") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: vitoset,
+          [category]: vitoset(diceValues),
         }));
       } else if (category === "sixes") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: kutoset,
+          [category]: kutoset(diceValues),
         }));
       } else if (category === "chance") {
         setPoints((prevpoints) => ({
           ...prevpoints,
-          [category]: chance,
+          [category]: chance(diceValues),
         }));
       } else {
         setPoints((prevpoints) => ({
@@ -280,7 +252,18 @@ const Play = () => {
         </div>
 
         {/* Ones & Pair */}
-        <div className="game-row">
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               <div className="game-kuva-div">
@@ -364,7 +347,7 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Twos & Pair x2 */}
         <div className="game-row">
