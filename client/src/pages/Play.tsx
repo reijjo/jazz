@@ -48,41 +48,43 @@ const Play = () => {
   });
 
   const [points, setPoints] = useState<LockPoints>({
-    ones: 0 || undefined,
-    twos: 0 || undefined,
-    threes: 0 || undefined,
-    fours: 0 || undefined,
-    fives: 0 || undefined,
-    sixes: 0 || undefined,
-    bonus: 0 || undefined, // Minor table ends
-    pair: 0 || undefined,
-    pair2: 0 || undefined,
-    same3: 0 || undefined,
-    same4: 0 || undefined,
-    straight15: 0 || undefined,
-    straight26: 0 || undefined,
-    fullhouse: 0 || undefined,
-    chance: 0 || undefined,
-    yatzy: 0 || undefined,
+    Ones: 0 || undefined,
+    Twos: 0 || undefined,
+    Threes: 0 || undefined,
+    Fours: 0 || undefined,
+    Fives: 0 || undefined,
+    Sixes: 0 || undefined,
+    Bonus: 0 || undefined, // Minor table ends
+    Pair: 0 || undefined,
+    Pair2: 0 || undefined,
+    Same3: 0 || undefined,
+    Same4: 0 || undefined,
+    Straight15: 0 || undefined,
+    Straight26: 0 || undefined,
+    Fullhouse: 0 || undefined,
+    Chance: 0 || undefined,
+    Yatzy: 0 || undefined,
   });
 
   const [selected, setSelected] = useState<keyof HoldPoints | null>(null);
   const [locked, setLocked] = useState<HoldPoints>({
-    ones: false,
-    twos: false,
-    threes: false,
-    fours: false,
-    fives: false,
-    sixes: false, // Minor table ends
-    pair: false,
-    pair2: false,
-    same3: false,
-    same4: false,
-    straight15: false,
-    straight26: false,
-    fullhouse: false,
-    chance: false,
-    yatzy: false,
+    Ones: false,
+    Twos: false,
+    Threes: false,
+    Fours: false,
+    Fives: false,
+    Sixes: false, // Minor table ends
+    Subtotal: false,
+    Bonus: false,
+    Pair: false,
+    Pair2: false,
+    Same3: false,
+    Same4: false,
+    Straight15: false,
+    Straight26: false,
+    Fullhouse: false,
+    Chance: false,
+    Yatzy: false,
   });
 
   const [rolls, setRolls] = useState<number>(3);
@@ -94,12 +96,12 @@ const Play = () => {
   );
 
   const subtotal =
-    (points.ones || 0) +
-    (points.twos || 0) +
-    (points.threes || 0) +
-    (points.fours || 0) +
-    (points.fives || 0) +
-    (points.sixes || 0);
+    (points.Ones || 0) +
+    (points.Twos || 0) +
+    (points.Threes || 0) +
+    (points.Fours || 0) +
+    (points.Fives || 0) +
+    (points.Sixes || 0);
 
   // When every slot is locked
   useEffect(() => {
@@ -109,12 +111,12 @@ const Play = () => {
     }
   }, [locked]);
 
-  // Check for bonus
+  // Check for Bonus
   useEffect(() => {
     if (subtotal >= 63) {
       setPoints((prevPoints) => ({
         ...prevPoints,
-        bonus: 50,
+        Bonus: 50,
       }));
     }
   }, [subtotal]);
@@ -170,37 +172,37 @@ const Play = () => {
 
   const handleLockPoints = (category: keyof LockPoints) => {
     if (selected && points[category] === undefined) {
-      if (category === "ones") {
+      if (category === "Ones") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: ykkoset(diceValues),
         }));
-      } else if (category === "twos") {
+      } else if (category === "Twos") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: kakkoset(diceValues),
         }));
-      } else if (category === "threes") {
+      } else if (category === "Threes") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: kolmoset(diceValues),
         }));
-      } else if (category === "fours") {
+      } else if (category === "Fours") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: neloset(diceValues),
         }));
-      } else if (category === "fives") {
+      } else if (category === "Fives") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: vitoset(diceValues),
         }));
-      } else if (category === "sixes") {
+      } else if (category === "Sixes") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: kutoset(diceValues),
         }));
-      } else if (category === "chance") {
+      } else if (category === "Chance") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: chance(diceValues),
@@ -251,7 +253,7 @@ const Play = () => {
           <h2>Testiukko {totalPoints} points</h2>
         </div>
 
-        {/* Ones & Pair */}
+        {/* Ones & PaiPair */}
         <GameRow
           selected={selected}
           locked={locked}
@@ -264,7 +266,7 @@ const Play = () => {
           handleMouseLeave={handleMouseLeave}
         />
 
-        {/* Twos & Pair x2 */}
+        {/* TwTwos & PaiPair x2 */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -276,31 +278,31 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "twos"
+                  selected === "Twos"
                     ? "selected"
-                    : locked.twos
+                    : locked.Twos
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("twos")}
+                onClick={() => handleHoldPoints("Twos")}
               >
-                {rolls < 3 && !locked.twos
+                {rolls < 3 && !locked.Twos
                   ? kakkoset(diceValues)
-                  : Number(points.twos) | 0}
+                  : Number(points.Twos) | 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Twos</div>
+                <div>TwTwos</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.twos.header,
-                      infofields.twos.children
+                      infofields.Twos.header,
+                      infofields.Twos.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -327,29 +329,29 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "pair2"
+                  selected === "Pair2"
                     ? "selected"
-                    : locked.pair2
+                    : locked.Pair2
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("pair2")}
+                onClick={() => handleHoldPoints("Pair2")}
               >
-                {points.pair2 || 0}
+                {points.Pair2 || 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Pair x2</div>
+                <div>PaiPair x2</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.pair2.header,
-                      infofields.pair2.children
+                      infofields.Pair2.header,
+                      infofields.Pair2.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -359,7 +361,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* Threes & Same x3 */}
+        {/* ThreThrees & Same x3 */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -371,31 +373,31 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "threes"
+                  selected === "Threes"
                     ? "selected"
-                    : locked.threes
+                    : locked.Threes
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("threes")}
+                onClick={() => handleHoldPoints("Threes")}
               >
-                {rolls < 3 && !locked.threes
+                {rolls < 3 && !locked.Threes
                   ? kolmoset(diceValues)
-                  : Number(points.threes) | 0}
+                  : Number(points.Threes) | 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Threes</div>
+                <div>ThreThrees</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.threes.header,
-                      infofields.threes.children
+                      infofields.Threes.header,
+                      infofields.Threes.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -419,15 +421,15 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "same3"
+                  selected === "Same3"
                     ? "selected"
-                    : locked.same3
+                    : locked.Same3
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("same3")}
+                onClick={() => handleHoldPoints("Same3")}
               >
-                {points.same3 || 0}
+                {points.Same3 || 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -440,8 +442,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.same3.header,
-                      infofields.same3.children
+                      infofields.Same3.header,
+                      infofields.Same3.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -451,7 +453,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* Fours & Same x4 */}
+        {/* FoursFours & Same x4 */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -463,31 +465,31 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "fours"
+                  selected === "Fours"
                     ? "selected"
-                    : locked.fours
+                    : locked.Fours
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("fours")}
+                onClick={() => handleHoldPoints("Fours")}
               >
-                {rolls < 3 && !locked.fours
+                {rolls < 3 && !locked.Fours
                   ? neloset(diceValues)
-                  : Number(points.fours) | 0}
+                  : Number(points.Fours) | 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Fours</div>
+                <div>FoursFours</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.fours.header,
-                      infofields.fours.children
+                      infofields.Fours.header,
+                      infofields.Fours.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -514,15 +516,15 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "same4"
+                  selected === "Same4"
                     ? "selected"
-                    : locked.same4
+                    : locked.Same4
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("same4")}
+                onClick={() => handleHoldPoints("Same4")}
               >
-                {points.same4 || 0}
+                {points.Same4 || 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -535,8 +537,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.same4.header,
-                      infofields.same4.children
+                      infofields.Same4.header,
+                      infofields.Same4.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -546,7 +548,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* Fives & Small straight */}
+        {/* FiveFives & Small straight */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -558,31 +560,31 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "fives"
+                  selected === "Fives"
                     ? "selected"
-                    : locked.fives
+                    : locked.Fives
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("fives")}
+                onClick={() => handleHoldPoints("Fives")}
               >
-                {rolls < 3 && !locked.fives
+                {rolls < 3 && !locked.Fives
                   ? vitoset(diceValues)
-                  : Number(points.fives) | 0}
+                  : Number(points.Fives) | 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Fives</div>
+                <div>FiveFives</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.fives.header,
-                      infofields.fives.children
+                      infofields.Fives.header,
+                      infofields.Fives.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -610,15 +612,15 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "straight15"
+                  selected === "Straight15"
                     ? "selected"
-                    : locked.straight15
+                    : locked.Straight15
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("straight15")}
+                onClick={() => handleHoldPoints("Straight15")}
               >
-                {points.straight15 || 0}
+                {points.Straight15 || 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -631,8 +633,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.straight15.header,
-                      infofields.straight15.children
+                      infofields.Straight15.header,
+                      infofields.Straight15.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -642,7 +644,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* Sixes & big straight */}
+        {/* SixSixes & big straight */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -654,31 +656,31 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "sixes"
+                  selected === "Sixes"
                     ? "selected"
-                    : locked.sixes
+                    : locked.Sixes
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("sixes")}
+                onClick={() => handleHoldPoints("Sixes")}
               >
-                {rolls < 3 && !locked.sixes
+                {rolls < 3 && !locked.Sixes
                   ? kutoset(diceValues)
-                  : Number(points.sixes) | 0}
+                  : Number(points.Sixes) | 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Sixes</div>
+                <div>SixSixes</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.sixes.header,
-                      infofields.sixes.children
+                      infofields.Sixes.header,
+                      infofields.Sixes.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -706,15 +708,15 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "straight26"
+                  selected === "Straight26"
                     ? "selected"
-                    : locked.straight26
+                    : locked.Straight26
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("straight26")}
+                onClick={() => handleHoldPoints("Straight26")}
               >
-                {points.straight26 || 0}
+                {points.Straight26 || 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -727,8 +729,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.straight26.header,
-                      infofields.straight26.children
+                      infofields.Straight26.header,
+                      infofields.Straight26.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -761,15 +763,15 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "fullhouse"
+                  selected === "Fullhouse"
                     ? "selected"
-                    : locked.fullhouse
+                    : locked.Fullhouse
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("fullhouse")}
+                onClick={() => handleHoldPoints("Fullhouse")}
               >
-                {points.fullhouse || 0}
+                {points.Fullhouse || 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -782,8 +784,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.fullhouse.header,
-                      infofields.fullhouse.children
+                      infofields.Fullhouse.header,
+                      infofields.Fullhouse.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -793,7 +795,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* Valisumma & Chance */}
+        {/* Valisumma & ChanChance */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -813,8 +815,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.subtotal.header,
-                      infofields.subtotal.children
+                      infofields.Subtotal.header,
+                      infofields.Subtotal.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -830,31 +832,31 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "chance"
+                  selected === "Chance"
                     ? "selected"
-                    : locked.chance
+                    : locked.Chance
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("chance")}
+                onClick={() => handleHoldPoints("Chance")}
               >
-                {rolls < 3 && !locked.chance
+                {rolls < 3 && !locked.Chance
                   ? chance(diceValues)
-                  : Number(points.chance) | 0}
+                  : Number(points.Chance) | 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Chance</div>
+                <div>ChanChance</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.chance.header,
-                      infofields.chance.children
+                      infofields.Chance.header,
+                      infofields.Chance.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -864,16 +866,16 @@ const Play = () => {
           </div>
         </div>
 
-        {/* Bonus & Yatzy */}
+        {/* BonusBonus & YaYatzy */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
-              <div className="game-kuva-div">Bonus</div>
+              <div className="game-kuva-div">BonusBonus</div>
             </div>
             <div className="game-pisteet">
               <button className="not-selected no-pointer">
-                {points.bonus || 0}
+                {points.Bonus || 0}
               </button>
             </div>
             <div className="game-ohje">
@@ -886,8 +888,8 @@ const Play = () => {
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.bonus.header,
-                      infofields.bonus.children
+                      infofields.Bonus.header,
+                      infofields.Bonus.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}
@@ -915,29 +917,29 @@ const Play = () => {
             <div className="game-pisteet">
               <button
                 className={
-                  selected === "yatzy"
+                  selected === "Yatzy"
                     ? "selected"
-                    : locked.yatzy
+                    : locked.Yatzy
                     ? "locked"
                     : "not-selected"
                 }
-                onClick={() => handleHoldPoints("yatzy")}
+                onClick={() => handleHoldPoints("Yatzy")}
               >
-                {points.yatzy || 0}
+                {points.Yatzy || 0}
               </button>
             </div>
             <div className="game-ohje">
               {" "}
               <div className="game-ohje-div">
-                <div>Yatzy</div>
+                <div>YaYatzy</div>
                 <img
                   src={info}
                   alt="info"
                   height="50%"
                   onMouseEnter={() =>
                     handleHover(
-                      infofields.yatzy.header,
-                      infofields.yatzy.children
+                      infofields.Yatzy.header,
+                      infofields.Yatzy.children
                     )
                   }
                   onMouseLeave={handleMouseLeave}

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { HoldDice, InfoMsg } from "./types";
+import { GameCategories, HoldDice, InfoMsg } from "./types";
 import { isAxiosError } from "axios";
 
 // Setting info message and cleaning up code
@@ -46,65 +46,106 @@ export const errorMsgFunc = (
 
 // Yatzy information
 export const infofields = {
-  ones: { header: "Ones", children: "Collect the sum of all ONES rolled." },
-  twos: { header: "Twos", children: "Collect the sum of all TWOS rolled." },
-  threes: {
+  Ones: { header: "Ones", children: "Collect the sum of all ONES rolled." },
+  Twos: { header: "Twos", children: "Collect the sum of all TWOS rolled." },
+  Threes: {
     header: "Threes",
     children: "Collect the sum of all THREES rolled.",
   },
-  fours: { header: "Fours", children: "Collect the sum of all FOURS rolled." },
-  fives: { header: "Fives", children: "Collect the sum of all FIVES rolled." },
-  sixes: { header: "Sixes", children: "Collect the sum of all SIXES rolled." },
-  subtotal: {
+  Fours: { header: "Fours", children: "Collect the sum of all FOURS rolled." },
+  Fives: { header: "Fives", children: "Collect the sum of all FIVES rolled." },
+  Sixes: { header: "Sixes", children: "Collect the sum of all SIXES rolled." },
+  Subtotal: {
     header: "Subtotal",
     children: "If you get over 63 points you get 50 extra points!",
   },
-  bonus: {
+  Bonus: {
     header: "Bonus",
     children: "If you get over 63 points you get 50 extra points!",
   },
-  pair: {
+  Pair: {
     header: "Pair",
     children:
       "Gather two dice showing the same number. Score the sum of those dice.",
   },
-  pair2: {
+  Pair2: {
     header: "Pair x 2",
     children: "Collect two sets of dice pairs. Score the sum of all four dice.",
   },
-  same3: {
+  Same3: {
     header: "Same x 3",
     children:
       "Collect three dice showing the same number. Score the sum of those dice.",
   },
-  same4: {
+  Same4: {
     header: "Same x 4",
     children:
       "Collect four dice showing the same number. Score the sum of those dice.",
   },
-  straight15: {
+  Straight15: {
     header: "Straight 1 - 5",
     children:
       "Gather a sequence of at least four consecutive dice numbers from 1 to 5.",
   },
-  straight26: {
+  Straight26: {
     header: "Straight 2 - 6",
     children:
       "Collect a sequence of all five consecutive dice numbers from 2 to 6.",
   },
-  fullhouse: {
+  Fullhouse: {
     header: "Full House",
     children:
       "Get three dice of one number and two dice of another. Score the sum of all dice.",
   },
-  chance: {
+  Chance: {
     header: "Chance",
     children: "Score the sum of all rolled dice, regardless of their values.",
   },
-  yatzy: {
+  Yatzy: {
     header: "Yatzy",
     children: "Get all five dice showing the same number. ",
   },
+};
+
+export const getInfoFields = (category: GameCategories) => {
+  switch (category) {
+    case GameCategories.Ones:
+      return infofields.Ones;
+    case GameCategories.Twos:
+      return infofields.Twos;
+    case GameCategories.Threes:
+      return infofields.Threes;
+    case GameCategories.Fours:
+      return infofields.Fours;
+    case GameCategories.Fives:
+      return infofields.Fives;
+    case GameCategories.Sixes:
+      return infofields.Sixes;
+    case GameCategories.Subtotal:
+      return infofields.Subtotal;
+    case GameCategories.Bonus:
+      return infofields.Bonus;
+    case GameCategories.Pair:
+      return infofields.Pair;
+    case GameCategories.Pair2:
+      return infofields.Pair2;
+    case GameCategories.Same3:
+      return infofields.Same3;
+    case GameCategories.Same4:
+      return infofields.Same4;
+    case GameCategories.Straight15:
+      return infofields.Straight15;
+    case GameCategories.Straight26:
+      return infofields.Straight26;
+    case GameCategories.Fullhouse:
+      return infofields.Fullhouse;
+    case GameCategories.Chance:
+      return infofields.Chance;
+    case GameCategories.Yatzy:
+      return infofields.Yatzy;
+    default:
+      return { header: "", children: "" };
+  }
 };
 
 export const resetHoldDice = (

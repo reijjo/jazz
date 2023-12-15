@@ -60,57 +60,61 @@ export type HoldDice = {
 };
 
 export type HoldPoints = {
-  ones: boolean;
-  twos: boolean;
-  threes: boolean;
-  fours: boolean;
-  fives: boolean;
-  sixes: boolean;
-  pair: boolean;
-  pair2: boolean;
-  same3: boolean;
-  same4: boolean;
-  straight15: boolean;
-  straight26: boolean;
-  fullhouse: boolean;
-  chance: boolean;
-  yatzy: boolean;
+  Ones: boolean;
+  Twos: boolean;
+  Threes: boolean;
+  Fours: boolean;
+  Fives: boolean;
+  Sixes: boolean;
+  Subtotal: boolean;
+  Bonus: boolean;
+  Pair: boolean;
+  Pair2: boolean;
+  Same3: boolean;
+  Same4: boolean;
+  Straight15: boolean;
+  Straight26: boolean;
+  Fullhouse: boolean;
+  Chance: boolean;
+  Yatzy: boolean;
 };
 
 export type LockPoints = {
-  ones?: number;
-  twos?: number;
-  threes?: number;
-  fours?: number;
-  fives?: number;
-  sixes?: number;
-  bonus?: number; // Minor table ends
-  pair?: number;
-  pair2?: number;
-  same3?: number;
-  same4?: number;
-  straight15?: number;
-  straight26?: number;
-  fullhouse?: number;
-  chance?: number;
-  yatzy?: number;
+  Ones?: number;
+  Twos?: number;
+  Threes?: number;
+  Fours?: number;
+  Fives?: number;
+  Sixes?: number;
+  Subtotal?: number;
+  Bonus?: number; // Minor table ends
+  Pair?: number;
+  Pair2?: number;
+  Same3?: number;
+  Same4?: number;
+  Straight15?: number;
+  Straight26?: number;
+  Fullhouse?: number;
+  Chance?: number;
+  Yatzy?: number;
 };
 
 export enum GameCategories {
-  Ones = "ones",
-  Twos = "twos",
-  Threes = "threes",
-  Fours = "fours",
-  Fives = "fives",
-  Sixes = "sixes",
-  Bonus = "bonus", // Minor table ends
-  Pair = "pair",
-  Pair2 = "pair2",
-  Same3 = "same3",
-  Same4 = "same4",
-  Straight15 = "straight15",
-  Straight16 = "straight26",
-  Fullhouse = "fullhouse",
-  Chance = "chance",
-  Yatzy = "yatzy",
+  Ones = "Ones",
+  Twos = "Twos",
+  Threes = "Threes",
+  Fours = "Fours",
+  Fives = "Fives",
+  Sixes = "Sixes",
+  Subtotal = "Subtotal",
+  Bonus = "Bonus", // Minor table ends
+  Pair = "Pair",
+  Pair2 = "Pair2",
+  Same3 = "Same3",
+  Same4 = "Same4",
+  Straight15 = "Straight15",
+  Straight26 = "Straight26",
+  Fullhouse = "Fullhouse",
+  Chance = "Chance",
+  Yatzy = "Yatzy",
 }
