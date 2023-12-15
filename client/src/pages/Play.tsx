@@ -253,7 +253,7 @@ const Play = () => {
           <h2>Testiukko {totalPoints} points</h2>
         </div>
 
-        {/* Ones & PaiPair */}
+        {/* Ones & Pair */}
         <GameRow
           selected={selected}
           locked={locked}
@@ -266,7 +266,18 @@ const Play = () => {
           handleMouseLeave={handleMouseLeave}
         />
 
-        {/* TwTwos & PaiPair x2 */}
+        {/* Twos & Pair x2 */}
+        {/* <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+        /> */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -361,7 +372,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* ThreThrees & Same x3 */}
+        {/* Threes & Same x3 */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -453,7 +464,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* FoursFours & Same x4 */}
+        {/* Fours & Same x4 */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -548,7 +559,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* FiveFives & Small straight */}
+        {/* Fives & Small straight */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -644,7 +655,7 @@ const Play = () => {
           </div>
         </div>
 
-        {/* SixSixes & big straight */}
+        {/* Sixes & big straight */}
         <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
@@ -871,7 +882,7 @@ const Play = () => {
           <div className="game-section">
             <div className="game-kuva">
               {" "}
-              <div className="game-kuva-div">BonusBonus</div>
+              <div className="game-kuva-div">Bonus</div>
             </div>
             <div className="game-pisteet">
               <button className="not-selected no-pointer">

@@ -1,5 +1,13 @@
 import { GameCategories, HoldPoints, LockPoints } from "../../utils/types";
-import { ykkoset } from "../../utils/helpers";
+import {
+  ykkoset,
+  kakkoset,
+  kolmoset,
+  neloset,
+  vitoset,
+  kutoset,
+  chance,
+} from "../../utils/helpers";
 
 type Props = {
   selected: keyof HoldPoints | null;
@@ -26,6 +34,81 @@ const GamePoints = ({
   diceValues,
   category,
 }: Props) => {
+  const calcPoints = () => {
+    switch (category) {
+      case GameCategories.Ones:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Twos:
+        return rolls < 3 && !locked[category]
+          ? kakkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Threes:
+        return rolls < 3 && !locked[category]
+          ? kolmoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Fours:
+        return rolls < 3 && !locked[category]
+          ? neloset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Fives:
+        return rolls < 3 && !locked[category]
+          ? vitoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Sixes:
+        return rolls < 3 && !locked[category]
+          ? kutoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Subtotal:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Bonus:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Pair:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Pair2:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Same3:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Same4:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Straight15:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Straight26:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Fullhouse:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Chance:
+        return rolls < 3 && !locked[category]
+          ? chance(diceValues)
+          : Number(points[category]) | 0;
+      case GameCategories.Yatzy:
+        return rolls < 3 && !locked[category]
+          ? ykkoset(diceValues)
+          : Number(points[category]) | 0;
+      default:
+        return Number(points[category] | 0);
+    }
+  };
+
   return (
     <div className="game-pisteet">
       <button
@@ -40,9 +123,7 @@ const GamePoints = ({
           handleHoldPoints(category);
         }}
       >
-        {rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
-          : Number(points[category]) | 0}
+        {calcPoints()}
       </button>
     </div>
   );
