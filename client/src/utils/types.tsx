@@ -95,3 +95,22 @@ export type LockPoints = {
   chance?: number;
   yatzy?: number;
 };
+
+export enum GameCategories {
+  Ones = "ones",
+  Twos = "twos",
+  Threes = "threes",
+  Fours = "fours",
+  Fives = "fives",
+  Sixes = "sixes",
+  Bonus = "bonus", // Minor table ends
+  Pair = "pair",
+  Pair2 = "pair2",
+  Same3 = "same3",
+  Same4 = "same4",
+  Straight15 = "straight15",
+  Straight16 = "straight26",
+  Fullhouse = "fullhouse",
+  Chance = "chance",
+  Yatzy = "yatzy",
+}

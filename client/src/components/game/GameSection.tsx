@@ -4,10 +4,13 @@
 // import dice4 from "../assets/images/icons/icons8-dice-four-64.png";
 // import dice5 from "../assets/images/icons/icons8-dice-five-64.png";
 // import dice6 from "../assets/images/icons/icons8-dice-six-64.png";
-// import info from "../assets/images/icons/icons8-info-50.png";
+import info from "../../assets/images/icons/icons8-info-50.png";
 
-import { HoldPoints, LockPoints } from "../../utils/types";
-import GameSection from "./GameSection";
+import GameImg from "./GameImg";
+// import GameInfo from "./GameInfo";
+// import GamePoints from "./GamePoints";
+import { GameCategories, HoldPoints, LockPoints } from "../../utils/types";
+import { infofields } from "../../utils/helpers";
 
 type Props = {
   selected: keyof HoldPoints | null;
@@ -27,7 +30,7 @@ type Props = {
   handleMouseLeave: () => void;
 };
 
-const GameRow = ({
+const GameSection = ({
   selected,
   locked,
   handleHoldPoints,
@@ -39,24 +42,12 @@ const GameRow = ({
   handleMouseLeave,
 }: Props) => {
   return (
-    <div className="game-row">
-      <GameSection
-        selected={selected}
-        locked={locked}
-        handleHoldPoints={handleHoldPoints}
-        rolls={rolls}
-        diceValues={diceValues}
-        ykkoset={ykkoset}
-        points={points}
-        handleHover={handleHover}
-        handleMouseLeave={handleMouseLeave}
-      />
-      {/* <div className="game-section">
-        <div className="game-kuva">
-          <div className="game-kuva-div">
-            <img src={dice1} alt="dice 1" height="100%" width="100%" />
-          </div>
-        </div>
+    <>
+      <div className="game-section">
+        {/* GAME IMAGE */}
+        <GameImg category={GameCategories.Ones} />
+        {/* END GAME IMAGE */}
+
         <div className="game-pisteet">
           <button
             className={
@@ -92,13 +83,7 @@ const GameRow = ({
         </div>
       </div>
       <div className="game-section">
-        <div className="game-kuva">
-          {" "}
-          <div className="game-kuva-div">
-            <img src={dice2} alt="dice 2" height="75%" width="50%" />
-            <img src={dice2} alt="dice 2" height="75%" width="50%" />
-          </div>
-        </div>
+        <GameImg category={GameCategories.Pair} />
         <div className="game-pisteet">
           <button
             className={
@@ -127,9 +112,9 @@ const GameRow = ({
             />
           </div>
         </div>
-      </div> */}
-    </div>
+      </div>
+    </>
   );
 };
 
-export default GameRow;
+export default GameSection;
