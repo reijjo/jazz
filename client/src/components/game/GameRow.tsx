@@ -1,4 +1,4 @@
-import { HoldPoints, LockPoints } from "../../utils/types";
+import { GameCategories, HoldPoints, LockPoints } from "../../utils/types";
 import GameSection from "./GameSection";
 
 type Props = {
@@ -17,6 +17,9 @@ type Props = {
   points: LockPoints;
   handleHover: (header: string, children: string) => void;
   handleMouseLeave: () => void;
+  category1: GameCategories;
+  category2: GameCategories;
+  subtotal: number;
 };
 
 const GameRow = ({
@@ -29,6 +32,9 @@ const GameRow = ({
   points,
   handleHover,
   handleMouseLeave,
+  category1,
+  category2,
+  subtotal,
 }: Props) => {
   return (
     <div className="game-row">
@@ -42,6 +48,22 @@ const GameRow = ({
         points={points}
         handleHover={handleHover}
         handleMouseLeave={handleMouseLeave}
+        category={category1}
+        subtotal={subtotal}
+      />
+
+      <GameSection
+        selected={selected}
+        locked={locked}
+        handleHoldPoints={handleHoldPoints}
+        rolls={rolls}
+        diceValues={diceValues}
+        ykkoset={ykkoset}
+        points={points}
+        handleHover={handleHover}
+        handleMouseLeave={handleMouseLeave}
+        category={category2}
+        subtotal={subtotal}
       />
     </div>
   );

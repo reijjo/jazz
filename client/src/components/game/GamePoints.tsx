@@ -6,7 +6,15 @@ import {
   neloset,
   vitoset,
   kutoset,
+  pair,
+  pair2,
   chance,
+  same3,
+  same4,
+  yatzy,
+  fullhouse,
+  straight15,
+  straight26,
 } from "../../utils/helpers";
 
 type Props = {
@@ -23,6 +31,7 @@ type Props = {
     dice5: number;
   };
   category: GameCategories;
+  subtotal: number;
 };
 
 const GamePoints = ({
@@ -33,6 +42,7 @@ const GamePoints = ({
   rolls,
   diceValues,
   category,
+  subtotal,
 }: Props) => {
   const calcPoints = () => {
     switch (category) {
@@ -60,41 +70,39 @@ const GamePoints = ({
         return rolls < 3 && !locked[category]
           ? kutoset(diceValues)
           : Number(points[category]) | 0;
+      case GameCategories.Empty:
+        return "";
       case GameCategories.Subtotal:
-        return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
-          : Number(points[category]) | 0;
+        return subtotal;
       case GameCategories.Bonus:
-        return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
-          : Number(points[category]) | 0;
+        return points.Bonus;
       case GameCategories.Pair:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? pair(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Pair2:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? pair2(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Same3:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? same3(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Same4:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? same4(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Straight15:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? straight15(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Straight26:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? straight26(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Fullhouse:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? fullhouse(diceValues)
           : Number(points[category]) | 0;
       case GameCategories.Chance:
         return rolls < 3 && !locked[category]
@@ -102,12 +110,16 @@ const GamePoints = ({
           : Number(points[category]) | 0;
       case GameCategories.Yatzy:
         return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
+          ? yatzy(diceValues)
           : Number(points[category]) | 0;
       default:
         return Number(points[category] | 0);
     }
   };
+
+  if (category === GameCategories.Empty) {
+    return null;
+  }
 
   return (
     <div className="game-pisteet">
@@ -115,6 +127,8 @@ const GamePoints = ({
         className={
           selected === category
             ? "selected"
+            : ["Empty", "Subtotal", "Bonus"].includes(category)
+            ? "not-selected"
             : locked[category]
             ? "locked"
             : "not-selected"

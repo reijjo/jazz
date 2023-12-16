@@ -192,5 +192,135 @@ export const kutoset = (diceValues: { [key: string]: number }) =>
     .reduce((acc, value) => acc + value, 0);
 
 // Major table
+export const pair = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+  const pair = findPair(values);
+  const firstPair = pair.length > 0 ? pair[0] * 2 : 0;
+  return firstPair;
+};
+
+export const pair2 = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+  const firstPair = findPair(values);
+
+  if (firstPair) {
+    const secondPair = findPair(
+      values.filter((value) => value !== firstPair[0])
+    );
+    if (secondPair && secondPair.length > 0) {
+      const pairSum = firstPair[0] * 2 + secondPair[0] * 2;
+      return pairSum;
+    }
+  }
+  return 0;
+};
+
+export const same3 = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+  const counts = findSame(values);
+
+  for (const number in counts) {
+    if (counts[number] >= 3) {
+      console.log("number", number);
+      return parseInt(number) * 3;
+    }
+  }
+
+  return 0;
+};
+
+export const same4 = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+  const counts = findSame(values);
+
+  for (const number in counts) {
+    if (counts[number] >= 4) {
+      console.log("number", number);
+      return parseInt(number) * 4;
+    }
+  }
+  return 0;
+};
+
+export const straight15 = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+
+  const straight = [1, 2, 3, 4, 5];
+
+  if (straight.every((number) => values.includes(number))) {
+    return 15;
+  }
+
+  return 0;
+};
+
+export const straight26 = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+
+  const straight = [2, 3, 4, 5, 6];
+
+  if (straight.every((number) => values.includes(number))) {
+    return 20;
+  }
+
+  return 0;
+};
+
+export const fullhouse = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+
+  const same = findSame(values);
+  for (const number in same) {
+    if (same[number] >= 3) {
+      console.log("number", number);
+      const threeOfAKind = parseInt(number);
+
+      if (threeOfAKind) {
+        const firstPair = findPair(
+          values.filter((values) => values !== threeOfAKind)
+        );
+        if (firstPair && firstPair.length > 0) {
+          return threeOfAKind * 3 + firstPair[0] * 2;
+        }
+      }
+    }
+  }
+
+  return 0;
+};
+
 export const chance = (diceValues: { [key: string]: number }) =>
   Object.values(diceValues).reduce((sum, value) => sum + (value || 0), 0);
+
+export const yatzy = (diceValues: { [key: string]: number }) => {
+  const values = Object.values(diceValues);
+  const counts = findSame(values);
+
+  for (const number in counts) {
+    if (counts[number] === 5) {
+      return 50;
+    }
+  }
+  return 0;
+};
+
+// Find value functions
+const findPair = (values: Array<number>) => {
+  const sorted = values
+    .filter((item, index) => values.indexOf(item) !== index)
+    .sort((a, b) => b - a);
+
+  return sorted;
+};
+
+const findSame = (values: number[]) => {
+  const counts: { [value: number]: number } = {};
+  for (const value of values) {
+    if (counts[value]) {
+      counts[value] += 1;
+    } else {
+      counts[value] = 1;
+    }
+  }
+  return counts;
+};

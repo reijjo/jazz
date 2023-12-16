@@ -19,6 +19,8 @@ type Props = {
   points: LockPoints;
   handleHover: (header: string, children: string) => void;
   handleMouseLeave: () => void;
+  category: GameCategories;
+  subtotal: number;
 };
 
 const GameSection = ({
@@ -30,47 +32,28 @@ const GameSection = ({
   points,
   handleHover,
   handleMouseLeave,
+  category,
+  subtotal,
 }: Props) => {
   return (
-    <>
-      {/* ONES */}
-      <div className="game-section">
-        <GameImg category={GameCategories.Ones} />
-        <GamePoints
-          category={GameCategories.Ones}
-          selected={selected}
-          handleHoldPoints={handleHoldPoints}
-          points={points}
-          rolls={rolls}
-          diceValues={diceValues}
-          locked={locked}
-        />
-        <GameInfo
-          category={GameCategories.Ones}
-          handleHover={handleHover}
-          handleMouseLeave={handleMouseLeave}
-        />
-      </div>
-
-      {/* PAIR */}
-      <div className="game-section">
-        <GameImg category={GameCategories.Pair} />
-        <GamePoints
-          category={GameCategories.Pair}
-          selected={selected}
-          handleHoldPoints={handleHoldPoints}
-          points={points}
-          rolls={rolls}
-          diceValues={diceValues}
-          locked={locked}
-        />
-        <GameInfo
-          category={GameCategories.Pair}
-          handleHover={handleHover}
-          handleMouseLeave={handleMouseLeave}
-        />
-      </div>
-    </>
+    <div className="game-section">
+      <GameImg category={category} />
+      <GamePoints
+        category={category}
+        selected={selected}
+        handleHoldPoints={handleHoldPoints}
+        points={points}
+        rolls={rolls}
+        diceValues={diceValues}
+        locked={locked}
+        subtotal={subtotal}
+      />
+      <GameInfo
+        category={category}
+        handleHover={handleHover}
+        handleMouseLeave={handleMouseLeave}
+      />
+    </div>
   );
 };
 

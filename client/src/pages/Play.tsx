@@ -1,18 +1,15 @@
-import dice1 from "../assets/images/icons/icons8-dice-one-64.png";
-import dice2 from "../assets/images/icons/icons8-dice-two-64.png";
-import dice3 from "../assets/images/icons/icons8-dice-three-64.png";
-import dice4 from "../assets/images/icons/icons8-dice-four-64.png";
-import dice5 from "../assets/images/icons/icons8-dice-five-64.png";
-import dice6 from "../assets/images/icons/icons8-dice-six-64.png";
-import info from "../assets/images/icons/icons8-info-50.png";
 import WhatToDo from "../components/WhatToDo";
 import GameRow from "../components/game/GameRow";
 
 import { useEffect, useState } from "react";
 
-import { HoldDice, HoldPoints, LockPoints } from "../utils/types";
 import {
-  infofields,
+  GameCategories,
+  HoldDice,
+  HoldPoints,
+  LockPoints,
+} from "../utils/types";
+import {
   resetHoldDice,
   ykkoset,
   kakkoset,
@@ -20,7 +17,15 @@ import {
   neloset,
   vitoset,
   kutoset,
+  pair,
   chance,
+  pair2,
+  same3,
+  same4,
+  yatzy,
+  fullhouse,
+  straight15,
+  straight26,
 } from "../utils/helpers";
 
 const Play = () => {
@@ -54,7 +59,7 @@ const Play = () => {
     Fours: 0 || undefined,
     Fives: 0 || undefined,
     Sixes: 0 || undefined,
-    Bonus: 0 || undefined, // Minor table ends
+    Bonus: 0, // Minor table ends
     Pair: 0 || undefined,
     Pair2: 0 || undefined,
     Same3: 0 || undefined,
@@ -74,8 +79,9 @@ const Play = () => {
     Fours: false,
     Fives: false,
     Sixes: false, // Minor table ends
-    Subtotal: false,
-    Bonus: false,
+    Empty: true,
+    Subtotal: true,
+    Bonus: true,
     Pair: false,
     Pair2: false,
     Same3: false,
@@ -202,10 +208,52 @@ const Play = () => {
           ...prevpoints,
           [category]: kutoset(diceValues),
         }));
+
+        // Major table
+      } else if (category === "Pair") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: pair(diceValues),
+        }));
+      } else if (category === "Pair2") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: pair2(diceValues),
+        }));
+      } else if (category === "Same3") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: same3(diceValues),
+        }));
+      } else if (category === "Same4") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: same4(diceValues),
+        }));
+      } else if (category === "Straight15") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: straight15(diceValues),
+        }));
+      } else if (category === "Straight26") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: straight26(diceValues),
+        }));
+      } else if (category === "Fullhouse") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: fullhouse(diceValues),
+        }));
       } else if (category === "Chance") {
         setPoints((prevpoints) => ({
           ...prevpoints,
           [category]: chance(diceValues),
+        }));
+      } else if (category === "Yatzy") {
+        setPoints((prevpoints) => ({
+          ...prevpoints,
+          [category]: yatzy(diceValues),
         }));
       } else {
         setPoints((prevpoints) => ({
@@ -234,13 +282,15 @@ const Play = () => {
     Object.values(locked).every((l) => l)
   );
 
-  console.log("points", points);
-  console.log("sbutota", subtotal);
+  console.log("locked", locked);
 
-  console.log(
-    "points sum",
-    Object.values(points).reduce((sum, value) => sum + (value || 0), 0)
-  );
+  // console.log("points", points);
+  // console.log("sbutota", subtotal);
+
+  // console.log(
+  //   "points sum",
+  //   Object.values(points).reduce((sum, value) => sum + (value || 0), 0)
+  // );
 
   // Return
   return (
@@ -264,10 +314,13 @@ const Play = () => {
           points={points}
           handleHover={handleHover}
           handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Ones}
+          category2={GameCategories.Pair}
+          subtotal={subtotal}
         />
 
         {/* Twos & Pair x2 */}
-        {/* <GameRow
+        <GameRow
           selected={selected}
           locked={locked}
           handleHoldPoints={handleHoldPoints}
@@ -277,8 +330,11 @@ const Play = () => {
           points={points}
           handleHover={handleHover}
           handleMouseLeave={handleMouseLeave}
-        /> */}
-        <div className="game-row">
+          category1={GameCategories.Twos}
+          category2={GameCategories.Pair2}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -370,10 +426,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Threes & Same x3 */}
-        <div className="game-row">
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Threes}
+          category2={GameCategories.Same3}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -462,10 +532,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Fours & Same x4 */}
-        <div className="game-row">
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Fours}
+          category2={GameCategories.Same4}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -557,10 +641,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Fives & Small straight */}
-        <div className="game-row">
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Fives}
+          category2={GameCategories.Straight15}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -653,10 +751,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Sixes & big straight */}
-        <div className="game-row">
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Sixes}
+          category2={GameCategories.Straight26}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -749,10 +861,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Empty & Full House */}
-        <div className="game-row">
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Empty}
+          category2={GameCategories.Fullhouse}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section"></div>
           <div className="game-section">
             <div className="game-kuva">
@@ -804,10 +930,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        {/* Valisumma & ChanChance */}
-        <div className="game-row">
+        {/* Valisumma & Chance */}
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Subtotal}
+          category2={GameCategories.Chance}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -875,10 +1015,24 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        {/* BonusBonus & YaYatzy */}
-        <div className="game-row">
+        {/* Bonus & Yatzy */}
+        <GameRow
+          selected={selected}
+          locked={locked}
+          handleHoldPoints={handleHoldPoints}
+          rolls={rolls}
+          diceValues={diceValues}
+          ykkoset={ykkoset}
+          points={points}
+          handleHover={handleHover}
+          handleMouseLeave={handleMouseLeave}
+          category1={GameCategories.Bonus}
+          category2={GameCategories.Yatzy}
+          subtotal={subtotal}
+        />
+        {/* <div className="game-row">
           <div className="game-section">
             <div className="game-kuva">
               {" "}
@@ -958,7 +1112,7 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Dices */}
         <div className="game-dices">

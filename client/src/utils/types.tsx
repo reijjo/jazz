@@ -66,6 +66,7 @@ export type HoldPoints = {
   Fours: boolean;
   Fives: boolean;
   Sixes: boolean;
+  Empty: boolean;
   Subtotal: boolean;
   Bonus: boolean;
   Pair: boolean;
@@ -86,6 +87,7 @@ export type LockPoints = {
   Fours?: number;
   Fives?: number;
   Sixes?: number;
+  Empty?: number;
   Subtotal?: number;
   Bonus?: number; // Minor table ends
   Pair?: number;
@@ -106,6 +108,7 @@ export enum GameCategories {
   Fours = "Fours",
   Fives = "Fives",
   Sixes = "Sixes",
+  Empty = "",
   Subtotal = "Subtotal",
   Bonus = "Bonus", // Minor table ends
   Pair = "Pair",
