@@ -1,5 +1,6 @@
 import WhatToDo from "../components/WhatToDo";
 import GameRow from "../components/game/GameRow";
+import cancel from "../assets/images/icons/icons8-cancel-96.png";
 
 import { useEffect, useState } from "react";
 
@@ -27,6 +28,7 @@ import {
   straight15,
   straight26,
 } from "../utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 const Play = () => {
   const [holdDice, setHoldDice] = useState<HoldDice>({
@@ -100,6 +102,8 @@ const Play = () => {
     (sum, value) => sum + (value || 0),
     0
   );
+
+  const navigate = useNavigate();
 
   const subtotal =
     (points.Ones || 0) +
@@ -300,7 +304,12 @@ const Play = () => {
       )}
       <div className="the-game">
         <div className="game-header">
-          <h2>Testiukko {totalPoints} points</h2>
+          <a onClick={() => navigate("/")}>
+            <img src={cancel} alt="cancel" title="go back" width="100%" />
+          </a>
+          <h2>
+            <span>Testiukko</span> {totalPoints} points
+          </h2>
         </div>
 
         {/* Ones & Pair */}

@@ -39,6 +39,13 @@
   justify-content: center;
 }
 
+@media screen and (max-width: 600px) {
+  #play {
+    margin-top: 16px;
+    justify-content: flex-start;
+  }
+}
+
 .register,
 .login {
   border: 4px solid var(--TEXT);
@@ -100,8 +107,32 @@
 }
 
 .game-header {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.game-header > a {
+  position: absolute;
+  left: 0;
+  transform: translate((-50%, -50%));
+  height: 80%;
+  aspect-ratio: 1/1;
+  padding: 0;
+  font-weight: 900;
+  background-color: transparent;
+}
+
+.game-header > a:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .game-header > h2 > span {
+    display: none;
+  }
 }
 
 .game-row {
@@ -119,7 +150,7 @@
 }
 
 .game-section {
-  border-right: 1px solid var(--PRIMARY);
+  border-right: 1px solid hsl(9, 80%, 85%);
   display: grid;
   /* place-items: center; */
   grid-template-columns: repeat(3, 1fr);
@@ -224,7 +255,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .game-ohje-div > div {
     display: none;
   }
