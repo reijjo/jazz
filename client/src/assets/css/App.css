@@ -34,9 +34,15 @@
 
 #sign,
 #lobby,
-#play {
+#play,
+#points {
   padding-top: 10vh;
   justify-content: center;
+}
+
+#points {
+  margin-top: 32px;
+  justify-content: flex-start;
 }
 
 @media screen and (max-width: 600px) {
@@ -494,4 +500,46 @@
 
 .no-pointer:hover {
   cursor: default;
+}
+
+/* Points */
+
+.points,
+.how-many {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.points-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px;
+  width: 100%;
+}
+
+.top-scores {
+  margin: 0 16px;
+  width: 30%;
+}
+
+.scores-over {
+  margin: 0 16px;
+  width: 50%;
+}
+
+.scores-over > div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.play-again {
+  width: 60%;
+  margin: 32px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

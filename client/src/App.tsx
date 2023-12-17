@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import Sign from "./pages/Sign";
 import Lobby from "./pages/Lobby";
 import Play from "./pages/Play";
+import Points from "./pages/Points";
 import { User } from "./utils/types";
 import authApi from "./api/authApi";
 import { isAxiosError } from "axios";
@@ -92,6 +93,7 @@ const App = () => {
           element={<Lobby user={user} setUser={setUser} />}
         />
         <Route path="*" element={<Homepage />} />
+        <Route path="/points" element={<Points />} />
       </Routes>
       {/* </main> */}
     </Router>
