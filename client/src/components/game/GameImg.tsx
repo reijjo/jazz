@@ -6,6 +6,7 @@ import dice3 from "../../assets/images/icons/icons8-dice-three-64.png";
 import dice4 from "../../assets/images/icons/icons8-dice-four-64.png";
 import dice5 from "../../assets/images/icons/icons8-dice-five-64.png";
 import dice6 from "../../assets/images/icons/icons8-dice-six-64.png";
+import home from "../../assets/images/icons/icons8-home-48.png";
 
 type Props = {
   category: GameCategories;
@@ -140,6 +141,43 @@ const GameImg = ({ category }: Props) => {
               <img src={dice5} alt="dice 5" height="24px" width="100%" />
             </div>
           </div>
+        )}
+      </div>
+      <div className="game-kuva-div-mobile">
+        {isOnes ? (
+          <img src={dice1} alt="dice 1" height="100%" width="100%" />
+        ) : isTwos ? (
+          <img src={dice2} alt="dice 2" height="100%" width="100%" />
+        ) : isThrees ? (
+          <img src={dice3} alt="dice 3" height="100%" width="100%" />
+        ) : isFours ? (
+          <img src={dice4} alt="dice 4" height="100%" width="100%" />
+        ) : isFives ? (
+          <img src={dice5} alt="dice 5" height="100%" width="100%" />
+        ) : isSixes ? (
+          <img src={dice6} alt="dice 6" height="100%" width="100%" />
+        ) : isEmpty ? null : isSubtotal ? (
+          <>=</>
+        ) : isBonus ? (
+          <>+</>
+        ) : isPair ? (
+          <>Pair</>
+        ) : isPair2 ? (
+          <>2xPair</>
+        ) : isSame3 ? (
+          <>3 x</>
+        ) : isSame4 ? (
+          <>4 x</>
+        ) : isStraight15 ? (
+          <>1-5</>
+        ) : isStraight26 ? (
+          <>2-6</>
+        ) : isFullhouse ? (
+          <img src={home} alt="dice 4" height="24px" width="100%" />
+        ) : isChance ? (
+          <>?</>
+        ) : (
+          <>Yatzy</>
         )}
       </div>
     </div>

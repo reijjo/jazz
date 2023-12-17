@@ -79,8 +79,8 @@
   overflow: hidden;
   width: 100%;
   max-width: 800px;
-  /* height: 75vh; */
   max-height: 1000px;
+  height: 100%;
   padding: 0 16px;
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax(40px 1fr));
@@ -92,6 +92,13 @@
   position: relative;
 }
 
+@media screen and (max-width: 600px) {
+  .the-game {
+    grid-template-rows: repeat(auto-fill, minmax(40px 1fr));
+    grid-auto-rows: minmax(40px, auto);
+  }
+}
+
 .game-header {
   display: grid;
   place-items: center;
@@ -100,7 +107,7 @@
 .game-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border-bottom: 1px solid var(--PRIMARY);
+  /* border-bottom: 1px solid var(--PRIMARY); */
 }
 
 .game-row:nth-child(even) {
@@ -173,9 +180,28 @@
   letter-spacing: 1.1px;
 }
 
+.game-kuva-div-mobile {
+  display: none;
+}
+
 .game-kuva-div img {
   /* border: 1px solid blue; */
   object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+  .game-kuva-div {
+    display: none;
+  }
+
+  .game-kuva-div-mobile {
+    height: 100%;
+    max-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+  }
 }
 
 .game-ohje-div {
@@ -198,6 +224,17 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 700px) {
+  .game-ohje-div > div {
+    display: none;
+  }
+
+  .game-ohje-div img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
 .too-many-dices {
   display: flex;
   flex-direction: column;
@@ -215,12 +252,15 @@
   align-items: center;
 }
 
+.dices-and-button {
+  height: 100%;
+}
+
 .game-dices {
   display: grid;
   place-items: center;
   grid-template-columns: repeat(5, 1fr);
   place-items: center;
-  /* border: 1px solid black; */
   margin: 16px 32px;
   /* width: 100%; */
 }
@@ -231,7 +271,13 @@
   place-items: center;
   width: 100%;
   height: 100%;
-  min-height: 60px;
+  height: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .game-dices > div {
+    height: 40px;
+  }
 }
 
 .no-dice {
@@ -276,7 +322,13 @@
   place-items: center;
   margin-bottom: 16px;
   /* border: 1px solid salmon; */
-  min-height: 50px;
+  height: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .game-button {
+    height: 40px;
+  }
 }
 
 .long-button-div > button:disabled {
@@ -349,6 +401,16 @@
 .short-button:hover,
 .short-button1:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .short-roll h3 {
+    display: none;
+  }
+
+  .short-roll h5 {
+    left: 50%;
+  }
 }
 
 /* my-input */

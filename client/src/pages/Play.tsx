@@ -334,99 +334,6 @@ const Play = () => {
           category2={GameCategories.Pair2}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <img src={dice2} alt="dice 2" height="100%" width="100%" />
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Twos"
-                    ? "selected"
-                    : locked.Twos
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Twos")}
-              >
-                {rolls < 3 && !locked.Twos
-                  ? kakkoset(diceValues)
-                  : Number(points.Twos) | 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>TwTwos</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Twos.header,
-                      infofields.Twos.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice4} alt="dice 4" height="24px" width="100%" />
-                    <img src={dice4} alt="dice 4" height="24px" width="100%" />
-                  </div>
-                  <div>
-                    <img src={dice6} alt="dice 6" height="24px" width="100%" />
-                    <img src={dice6} alt="dice 6" height="24px" width="100%" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Pair2"
-                    ? "selected"
-                    : locked.Pair2
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Pair2")}
-              >
-                {points.Pair2 || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>PaiPair x2</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Pair2.header,
-                      infofields.Pair2.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Threes & Same x3 */}
         <GameRow
@@ -443,96 +350,6 @@ const Play = () => {
           category2={GameCategories.Same3}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <img src={dice3} alt="dice 3" height="100%" width="100%" />
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Threes"
-                    ? "selected"
-                    : locked.Threes
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Threes")}
-              >
-                {rolls < 3 && !locked.Threes
-                  ? kolmoset(diceValues)
-                  : Number(points.Threes) | 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>ThreThrees</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Threes.header,
-                      infofields.Threes.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice3} alt="dice 3" height="24px" width="100%" />
-                    <img src={dice3} alt="dice 3" height="24px" width="100%" />
-                    <img src={dice3} alt="dice 3" height="24px" width="100%" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Same3"
-                    ? "selected"
-                    : locked.Same3
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Same3")}
-              >
-                {points.Same3 || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>Same x3</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Same3.header,
-                      infofields.Same3.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Fours & Same x4 */}
         <GameRow
@@ -549,99 +366,6 @@ const Play = () => {
           category2={GameCategories.Same4}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <img src={dice4} alt="dice 4" height="100%" width="100%" />
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Fours"
-                    ? "selected"
-                    : locked.Fours
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Fours")}
-              >
-                {rolls < 3 && !locked.Fours
-                  ? neloset(diceValues)
-                  : Number(points.Fours) | 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>FoursFours</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Fours.header,
-                      infofields.Fours.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice5} alt="dice 5" height="24px" width="24px" />
-                    <img src={dice5} alt="dice 5" height="24px" width="24px" />
-                  </div>
-                  <div>
-                    <img src={dice5} alt="dice 5" height="24px" width="24px" />
-                    <img src={dice5} alt="dice 5" height="24px" width="24px" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Same4"
-                    ? "selected"
-                    : locked.Same4
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Same4")}
-              >
-                {points.Same4 || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>Same x4</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Same4.header,
-                      infofields.Same4.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Fives & Small straight */}
         <GameRow
@@ -658,100 +382,6 @@ const Play = () => {
           category2={GameCategories.Straight15}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <img src={dice5} alt="dice 5" height="100%" width="100%" />
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Fives"
-                    ? "selected"
-                    : locked.Fives
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Fives")}
-              >
-                {rolls < 3 && !locked.Fives
-                  ? vitoset(diceValues)
-                  : Number(points.Fives) | 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>FiveFives</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Fives.header,
-                      infofields.Fives.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice1} alt="dice 1" height="24px" width="100%" />
-                    <img src={dice2} alt="dice 2" height="24px" width="100%" />
-                  </div>
-                  <div>
-                    <img src={dice3} alt="dice 3" height="24px" width="100%" />
-                    <img src={dice4} alt="dice 4" height="24px" width="100%" />
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Straight15"
-                    ? "selected"
-                    : locked.Straight15
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Straight15")}
-              >
-                {points.Straight15 || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>Straight 1-5</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Straight15.header,
-                      infofields.Straight15.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Sixes & big straight */}
         <GameRow
@@ -768,100 +398,6 @@ const Play = () => {
           category2={GameCategories.Straight26}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <img src={dice6} alt="dice 6" height="100%" width="100%" />
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Sixes"
-                    ? "selected"
-                    : locked.Sixes
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Sixes")}
-              >
-                {rolls < 3 && !locked.Sixes
-                  ? kutoset(diceValues)
-                  : Number(points.Sixes) | 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>SixSixes</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Sixes.header,
-                      infofields.Sixes.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice2} alt="dice 2" height="24px" width="100%" />
-                    <img src={dice3} alt="dice 3" height="24px" width="100%" />
-                  </div>
-                  <div>
-                    <img src={dice4} alt="dice 4" height="24px" width="100%" />
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                    <img src={dice6} alt="dice 6" height="24px" width="100%" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Straight26"
-                    ? "selected"
-                    : locked.Straight26
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Straight26")}
-              >
-                {points.Straight26 || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>Straight 2-6</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Straight26.header,
-                      infofields.Straight26.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Empty & Full House */}
         <GameRow
@@ -878,59 +414,6 @@ const Play = () => {
           category2={GameCategories.Fullhouse}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section"></div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice4} alt="dice 4" height="24px" width="100%" />
-                    <img src={dice4} alt="dice 4" height="24px" width="100%" />
-                  </div>
-                  <div>
-                    <img src={dice6} alt="dice 6" height="24px" width="100%" />
-                    <img src={dice6} alt="dice 6" height="24px" width="100%" />
-                    <img src={dice6} alt="dice 6" height="24px" width="100%" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Fullhouse"
-                    ? "selected"
-                    : locked.Fullhouse
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Fullhouse")}
-              >
-                {points.Fullhouse || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>Full House</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Fullhouse.header,
-                      infofields.Fullhouse.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Valisumma & Chance */}
         <GameRow
@@ -947,75 +430,6 @@ const Play = () => {
           category2={GameCategories.Chance}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">=</div>
-            </div>
-            <div className="game-pisteet">
-              <button className="not-selected no-pointer">{subtotal}</button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>Subtotal</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Subtotal.header,
-                      infofields.Subtotal.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">?</div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Chance"
-                    ? "selected"
-                    : locked.Chance
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Chance")}
-              >
-                {rolls < 3 && !locked.Chance
-                  ? chance(diceValues)
-                  : Number(points.Chance) | 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>ChanChance</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Chance.header,
-                      infofields.Chance.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Bonus & Yatzy */}
         <GameRow
@@ -1032,179 +446,101 @@ const Play = () => {
           category2={GameCategories.Yatzy}
           subtotal={subtotal}
         />
-        {/* <div className="game-row">
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">Bonus</div>
-            </div>
-            <div className="game-pisteet">
-              <button className="not-selected no-pointer">
-                {points.Bonus || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>+50 points</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Bonus.header,
-                      infofields.Bonus.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="game-section">
-            <div className="game-kuva">
-              {" "}
-              <div className="game-kuva-div">
-                <div className="too-many-dices">
-                  <div>
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                  </div>
-                  <div>
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                    <img src={dice5} alt="dice 5" height="24px" width="100%" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="game-pisteet">
-              <button
-                className={
-                  selected === "Yatzy"
-                    ? "selected"
-                    : locked.Yatzy
-                    ? "locked"
-                    : "not-selected"
-                }
-                onClick={() => handleHoldPoints("Yatzy")}
-              >
-                {points.Yatzy || 0}
-              </button>
-            </div>
-            <div className="game-ohje">
-              {" "}
-              <div className="game-ohje-div">
-                <div>YaYatzy</div>
-                <img
-                  src={info}
-                  alt="info"
-                  height="50%"
-                  onMouseEnter={() =>
-                    handleHover(
-                      infofields.Yatzy.header,
-                      infofields.Yatzy.children
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Dices */}
-        <div className="game-dices">
-          {Object.keys(holdDice).map((diceId) => (
-            <div className="dice" key={diceId}>
-              <button
-                id={diceId}
-                className={
-                  holdDice[diceId as keyof HoldDice] ? "dice-selected" : ""
-                }
-                type="button"
-                onClick={() => handleDiceClick(diceId as keyof HoldDice)}
-                disabled={rolls === 3}
-              >
-                {diceValues[diceId as keyof HoldDice]}
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* Roll button */}
-        <div className="game-button">
-          {rolls === 3 ? (
-            <div className="long-button-div">
-              <button
-                className="my-btn-outline extra-outline long-button"
-                type="button"
-                onClick={handleDiceRoll}
-                disabled={gameOver}
-              >
-                <h3>Roll</h3>
-                <h4
-                  style={{
-                    position: "absolute",
-                    right: "16px",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                    color: "var(--TEXT)",
-                    border: "1px solid var(--TEXT)",
-                    borderRadius: "50%",
-                    width: "24px",
-                    height: "24px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "var(--PRIMARY3)", // Set the background color
-                  }}
-                >
-                  {rolls}
-                </h4>
-              </button>
-            </div>
-          ) : (
-            <div className="short-button-div">
-              <div className="short-roll">
+        <div className="dices-and-button">
+          <div className="game-dices">
+            {Object.keys(holdDice).map((diceId) => (
+              <div className="dice" key={diceId}>
                 <button
-                  className="my-btn-outline extra-outline short-button1"
+                  id={diceId}
+                  className={
+                    holdDice[diceId as keyof HoldDice] ? "dice-selected" : ""
+                  }
+                  type="button"
+                  onClick={() => handleDiceClick(diceId as keyof HoldDice)}
+                  disabled={rolls === 3}
+                >
+                  {diceValues[diceId as keyof HoldDice]}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Roll button */}
+          <div className="game-button">
+            {rolls === 3 ? (
+              <div className="long-button-div">
+                <button
+                  className="my-btn-outline extra-outline long-button"
+                  type="button"
                   onClick={handleDiceRoll}
-                  disabled={rolls === 0}
+                  disabled={gameOver}
                 >
                   <h3>Roll</h3>
+                  <h4
+                    style={{
+                      position: "absolute",
+                      right: "16px",
+                      top: "50%",
+                      transform: "translate(-50%, -50%)",
+                      color: "var(--TEXT)",
+                      border: "1px solid var(--TEXT)",
+                      borderRadius: "50%",
+                      width: "24px",
+                      height: "24px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: "var(--PRIMARY3)", // Set the background color
+                    }}
+                  >
+                    {rolls}
+                  </h4>
                 </button>
-                <h5
-                  style={{
-                    position: "absolute",
-                    right: "16px",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                    color: "var(--TEXT)",
-                    border: "1px solid var(--TEXT)",
-                    borderRadius: "50%",
-                    width: "24px",
-                    height: "24px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "var(--PRIMARY3)", // Set the background color
-                  }}
-                >
-                  {rolls}
-                </h5>
               </div>
-              <button
-                className="my-btn-outline extra-outline short-button"
-                style={{ backgroundColor: "var(--PRIMARY)" }}
-                disabled={rolls === 3 || selected === null}
-                onClick={() => handleLockPoints(selected as keyof LockPoints)}
-              >
-                <h3>Set</h3>
-              </button>
-            </div>
-          )}
+            ) : (
+              <div className="short-button-div">
+                <div className="short-roll">
+                  <button
+                    className="my-btn-outline extra-outline short-button1"
+                    onClick={handleDiceRoll}
+                    disabled={rolls === 0}
+                  >
+                    <h3>Roll</h3>
+                  </button>
+                  <h5
+                    style={{
+                      position: "absolute",
+                      right: "16px",
+                      top: "50%",
+                      transform: "translate(-50%, -50%)",
+                      color: "var(--TEXT)",
+                      border: "1px solid var(--TEXT)",
+                      borderRadius: "50%",
+                      width: "24px",
+                      height: "24px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: "var(--PRIMARY3)", // Set the background color
+                    }}
+                    onClick={handleDiceRoll}
+                  >
+                    {rolls}
+                  </h5>
+                </div>
+                <button
+                  className="my-btn-outline extra-outline short-button"
+                  style={{ backgroundColor: "var(--PRIMARY)" }}
+                  disabled={rolls === 3 || selected === null}
+                  onClick={() => handleLockPoints(selected as keyof LockPoints)}
+                >
+                  <h3>Set</h3>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
