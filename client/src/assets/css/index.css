@@ -1,9 +1,9 @@
 :root {
   --PRIMARY: #e8492c;
-  --PRIMARY2: #fd5802;
+  --PRIMARY2: rgb(252, 90, 3);
   --PRIMARY3: #ffbc04;
 
-  --SECONDARY: hsl(191, 81%, 35%);
+  --SECONDARY: rgb(17, 135, 162);
   --SECONDARY2: hsl(191, 81%, 20%);
 
   --BG: #e5dcc8;

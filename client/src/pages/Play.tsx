@@ -27,6 +27,7 @@ import {
   fullhouse,
   straight15,
   straight26,
+  imgForDice,
 } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 
@@ -46,6 +47,10 @@ const Play = () => {
     dice4: Math.floor(Math.random() * 6) + 1,
     dice5: Math.floor(Math.random() * 6) + 1,
   });
+
+  // const [randomValues, setRandomValues] = useState<{
+  //   [key: number]: string;
+  // } | null>(null);
 
   // For instructions
   const [isHovered, setIsHovered] = useState(false);
@@ -97,6 +102,7 @@ const Play = () => {
 
   const [rolls, setRolls] = useState<number>(3);
   const [gameOver, setGameOver] = useState(false);
+  const [diceRolling, setDiceRolling] = useState(false);
 
   const totalPoints = Object.values(points).reduce(
     (sum, value) => sum + (value || 0),
@@ -161,7 +167,13 @@ const Play = () => {
   // To roll the dices
   const handleDiceRoll = () => {
     // Just roll the unheld dices
-    if (rolls > 0) {
+    setDiceRolling(true);
+
+    setTimeout(() => {
+      setDiceRolling(false);
+    }, 300);
+
+    if (rolls > 0 && !diceRolling) {
       const newValues = { ...diceValues };
       Object.keys(newValues).forEach((diceId) => {
         if (!holdDice[diceId as keyof HoldDice]) {
@@ -191,7 +203,7 @@ const Play = () => {
   const handleLockPoints = (category: keyof LockPoints) => {
     if (selected && points[category] === undefined) {
       if (category === "Ones") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -203,7 +215,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Twos") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -215,7 +227,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Threes") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -227,7 +239,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Fours") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -239,7 +251,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Fives") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -251,7 +263,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Sixes") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -264,7 +276,7 @@ const Play = () => {
         }
         // Major table
       } else if (category === "Pair") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -276,7 +288,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Pair2") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -288,7 +300,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Same3") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -300,7 +312,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Same4") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -312,7 +324,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Straight15") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -324,7 +336,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Straight26") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -336,7 +348,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Fullhouse") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -348,7 +360,7 @@ const Play = () => {
           }));
         }
       } else if (category === "Chance") {
-        if (points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50) {
           setPoints((prevpoints) => ({
             ...prevpoints,
             [category]: yatzy(diceValues),
@@ -568,14 +580,26 @@ const Play = () => {
               <div className="dice" key={diceId}>
                 <button
                   id={diceId}
-                  className={
-                    holdDice[diceId as keyof HoldDice] ? "dice-selected" : ""
-                  }
+                  className={`
+									${holdDice[diceId as keyof HoldDice] ? "dice-selected" : ""}
+									${!holdDice[diceId as keyof HoldDice] && diceRolling ? "dice-rolling" : ""}
+									`}
                   type="button"
                   onClick={() => handleDiceClick(diceId as keyof HoldDice)}
-                  disabled={rolls === 3}
+                  disabled={rolls === 3 || diceRolling}
                 >
-                  {diceValues[diceId as keyof HoldDice]}
+                  {/* {!diceRolling || holdDice[diceId as keyof HoldDice]
+                    ? diceValues[diceId as keyof HoldDice]
+                    : Math.floor(Math.random() * 6) + 1} */}
+                  <img
+                    className="dice-img"
+                    src={
+                      !diceRolling || holdDice[diceId as keyof HoldDice]
+                        ? imgForDice(diceValues[diceId as keyof HoldDice])
+                        : imgForDice(Math.floor(Math.random() * 6) + 1)
+                    }
+                    alt="dice"
+                  />
                 </button>
               </div>
             ))}
@@ -589,7 +613,7 @@ const Play = () => {
                   className="my-btn-outline extra-outline long-button"
                   type="button"
                   onClick={handleDiceRoll}
-                  disabled={gameOver}
+                  disabled={gameOver || diceRolling}
                 >
                   <h3>Roll</h3>
                   <h4
@@ -619,7 +643,7 @@ const Play = () => {
                   <button
                     className="my-btn-outline extra-outline short-button1"
                     onClick={handleDiceRoll}
-                    disabled={rolls === 0}
+                    disabled={rolls === 0 || diceRolling}
                   >
                     <h3>Roll</h3>
                   </button>
@@ -647,7 +671,7 @@ const Play = () => {
                 <button
                   className="my-btn-outline extra-outline short-button"
                   style={{ backgroundColor: "var(--PRIMARY)" }}
-                  disabled={rolls === 3 || selected === null}
+                  disabled={rolls === 3 || selected === null || diceRolling}
                   onClick={() => handleLockPoints(selected as keyof LockPoints)}
                 >
                   <h3>Set</h3>

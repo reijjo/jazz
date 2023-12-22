@@ -2,6 +2,13 @@ import { Dispatch, SetStateAction } from "react";
 import { GameCategories, HoldDice, InfoMsg } from "./types";
 import { isAxiosError } from "axios";
 
+import oneImg from "../assets/images/icons/rolldice/Side_1_Pip.png";
+import twoImg from "../assets/images/icons/rolldice/Side_2_Pips.png";
+import threeImg from "../assets/images/icons/rolldice/Side_3_Pips.png";
+import fourImg from "../assets/images/icons/rolldice/Side_4_Pips.png";
+import fiveImg from "../assets/images/icons/rolldice/Side_5_Pips.png";
+import sixImg from "../assets/images/icons/rolldice/Side_6_Pips.png";
+
 // Setting info message and cleaning up code
 type okResponse = {
   message: string;
@@ -323,4 +330,23 @@ const findSame = (values: number[]) => {
     }
   }
   return counts;
+};
+
+export const imgForDice = (value: number): string => {
+  switch (value) {
+    case 1:
+      return oneImg;
+    case 2:
+      return twoImg;
+    case 3:
+      return threeImg;
+    case 4:
+      return fourImg;
+    case 5:
+      return fiveImg;
+    case 6:
+      return sixImg;
+    default:
+      return "";
+  }
 };
