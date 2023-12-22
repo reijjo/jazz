@@ -66,6 +66,7 @@ const Play = () => {
     Fours: 0 || undefined,
     Fives: 0 || undefined,
     Sixes: 0 || undefined,
+    Subtotal: 0,
     Bonus: 0, // Minor table ends
     Pair: 0 || undefined,
     Pair2: 0 || undefined,

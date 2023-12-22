@@ -47,12 +47,18 @@ const GamePoints = ({
   const calcPoints = () => {
     switch (category) {
       case GameCategories.Ones:
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category]
+        ) {
           return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? ykkoset(diceValues)
+            : Number(points[category]) | 0;
         }
-        return rolls < 3 && !locked[category]
-          ? ykkoset(diceValues)
-          : Number(points[category]) | 0;
 
       case GameCategories.Twos:
         return rolls < 3 && !locked[category]
