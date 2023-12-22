@@ -51,7 +51,8 @@ const GamePoints = ({
           locked.Yatzy &&
           points.Yatzy === 50 &&
           rolls < 3 &&
-          !locked[category]
+          !locked[category] &&
+          yatzy(diceValues)
         ) {
           return 50;
         } else {
@@ -61,30 +62,75 @@ const GamePoints = ({
         }
 
       case GameCategories.Twos:
-        return rolls < 3 && !locked[category]
-          ? kakkoset(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? kakkoset(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Threes:
-        return rolls < 3 && !locked[category]
-          ? kolmoset(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? kolmoset(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Fours:
-        return rolls < 3 && !locked[category]
-          ? neloset(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? neloset(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Fives:
-        return rolls < 3 && !locked[category]
-          ? vitoset(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? vitoset(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Sixes:
-        return rolls < 3 && !locked[category]
-          ? kutoset(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? kutoset(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Empty:
         return "";
       case GameCategories.Subtotal:
@@ -92,45 +138,117 @@ const GamePoints = ({
       case GameCategories.Bonus:
         return points.Bonus;
       case GameCategories.Pair:
-        return rolls < 3 && !locked[category]
-          ? pair(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? pair(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Pair2:
-        return rolls < 3 && !locked[category]
-          ? pair2(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? pair2(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Same3:
-        return rolls < 3 && !locked[category]
-          ? same3(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? same3(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Same4:
-        return rolls < 3 && !locked[category]
-          ? same4(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? same4(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Straight15:
-        return rolls < 3 && !locked[category]
-          ? straight15(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? straight15(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Straight26:
-        return rolls < 3 && !locked[category]
-          ? straight26(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? straight26(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Fullhouse:
-        return rolls < 3 && !locked[category]
-          ? fullhouse(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? fullhouse(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Chance:
-        return rolls < 3 && !locked[category]
-          ? chance(diceValues)
-          : Number(points[category]) | 0;
-
+        if (
+          locked.Yatzy &&
+          points.Yatzy === 50 &&
+          rolls < 3 &&
+          !locked[category] &&
+          yatzy(diceValues)
+        ) {
+          return 50;
+        } else {
+          return rolls < 3 && !locked[category]
+            ? chance(diceValues)
+            : Number(points[category]) | 0;
+        }
       case GameCategories.Yatzy:
         return rolls < 3 && !locked[category]
           ? yatzy(diceValues)
