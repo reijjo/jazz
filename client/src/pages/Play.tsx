@@ -174,10 +174,10 @@ const Play = () => {
       const newValues = { ...diceValues };
       Object.keys(newValues).forEach((diceId) => {
         if (!holdDice[diceId as keyof HoldDice]) {
-          newValues[diceId as keyof HoldDice] =
-            Math.floor(Math.random() * 6) + 1;
           // newValues[diceId as keyof HoldDice] =
-          //   Math.floor(Math.random() * 2) + 1;
+          //   Math.floor(Math.random() * 6) + 1;
+          newValues[diceId as keyof HoldDice] =
+            Math.floor(Math.random() * 3) + 1;
         }
       });
 
@@ -203,10 +203,10 @@ const Play = () => {
   const handleLockPoints = (category: keyof LockPoints) => {
     if (selected && points[category] === undefined) {
       if (category === "Ones") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Ones: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -215,10 +215,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Twos") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Twos: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -227,10 +227,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Threes") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Threes: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -239,10 +239,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Fours") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Fours: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -251,10 +251,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Fives") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Fives: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -263,10 +263,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Sixes") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Sixes: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -276,10 +276,10 @@ const Play = () => {
         }
         // Major table
       } else if (category === "Pair") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Pair: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -288,10 +288,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Pair2") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Pair2: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -300,10 +300,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Same3") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Same3: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -312,10 +312,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Same4") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Same4: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -324,10 +324,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Straight15") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Straight15: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -336,10 +336,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Straight26") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Straight26: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -348,10 +348,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Fullhouse") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Fullhouse: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
@@ -360,10 +360,10 @@ const Play = () => {
           }));
         }
       } else if (category === "Chance") {
-        if (locked.Yatzy && points.Yatzy === 50) {
+        if (locked.Yatzy && points.Yatzy === 50 && yatzy(diceValues)) {
           setPoints((prevpoints) => ({
             ...prevpoints,
-            [category]: yatzy(diceValues),
+            Chance: 50,
           }));
         } else {
           setPoints((prevpoints) => ({
