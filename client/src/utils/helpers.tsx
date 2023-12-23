@@ -228,7 +228,6 @@ export const same3 = (diceValues: { [key: string]: number }) => {
 
   for (const number in counts) {
     if (counts[number] >= 3) {
-      console.log("number", number);
       return parseInt(number) * 3;
     }
   }
@@ -242,7 +241,6 @@ export const same4 = (diceValues: { [key: string]: number }) => {
 
   for (const number in counts) {
     if (counts[number] >= 4) {
-      console.log("number", number);
       return parseInt(number) * 4;
     }
   }
@@ -279,7 +277,6 @@ export const fullhouse = (diceValues: { [key: string]: number }) => {
   const same = findSame(values);
   for (const number in same) {
     if (same[number] >= 3) {
-      console.log("number", number);
       const threeOfAKind = parseInt(number);
 
       if (threeOfAKind) {

@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoute";
 import { connectMongo } from "./utils/helpers";
 import authRouter from "./routes/authRoute";
+import pointsRouter from "./routes/pointsRoute";
 // import { errorHandler } from "./utils/middleware";
 
 dotenv.config();
@@ -26,6 +27,9 @@ app.get("/ping", (_req: Request, res: Response) => {
 
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
+app.use("/points", pointsRouter);
+
+app.use(express.static("dist"));
 
 // app.use(errorHandler);
 

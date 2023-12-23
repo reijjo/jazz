@@ -101,6 +101,13 @@ export type LockPoints = {
   Yatzy?: number;
 };
 
+export type Points = {
+  id: string;
+  username: string;
+  points: number;
+  createdAt: Date;
+};
+
 export enum GameCategories {
   Ones = "Ones",
   Twos = "Twos",

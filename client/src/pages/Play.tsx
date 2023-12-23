@@ -30,6 +30,8 @@ import {
   imgForDice,
 } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
+import Yatzy from "../components/Yatzy";
+import pointsApi from "../api/pointsApi";
 
 const Play = () => {
   const [holdDice, setHoldDice] = useState<HoldDice>({
@@ -104,6 +106,7 @@ const Play = () => {
   const [rolls, setRolls] = useState<number>(3);
   const [gameOver, setGameOver] = useState(false);
   const [diceRolling, setDiceRolling] = useState(false);
+  const [isYatzy, setIsYatzy] = useState(false);
 
   const totalPoints = Object.values(points).reduce(
     (sum, value) => sum + (value || 0),
@@ -120,13 +123,23 @@ const Play = () => {
     (points.Fives || 0) +
     (points.Sixes || 0);
 
-  // When every slot is locked
+  // When every slot is locked and Game Over
   useEffect(() => {
-    if (Object.values(locked).every((value) => value === true)) {
-      console.log("ALL DONE!");
-      setGameOver(true);
-    }
-  }, [locked]);
+    const theEnd = async () => {
+      if (Object.values(locked).every((value) => value === true)) {
+        try {
+          setGameOver(true);
+          localStorage.setItem("latestPoints", String(totalPoints));
+
+          await pointsApi.addPoints(totalPoints);
+          navigate("/points");
+        } catch (error: unknown) {
+          console.log("error", error);
+        }
+      }
+    };
+    theEnd();
+  }, [locked, totalPoints, navigate]);
 
   // Check for Bonus
   useEffect(() => {
@@ -140,10 +153,14 @@ const Play = () => {
 
   // Check for Yatzy
   useEffect(() => {
-    if (points.Yatzy === 50 && rolls < 3) {
-      console.log("on jo yatzy");
+    if (yatzy(diceValues) && rolls < 3) {
+      console.log("yatzy");
+      setIsYatzy(true);
+      setTimeout(() => {
+        setIsYatzy(false);
+      }, 1500);
     }
-  }, [points.Yatzy, rolls]);
+  }, [diceValues, rolls]);
 
   const handleHover = (header: string, children: string) => {
     setHoverInfos({ header: header, children: children });
@@ -156,7 +173,7 @@ const Play = () => {
 
   // To hold the dices
   const handleDiceClick = (diceId: keyof HoldDice) => {
-    console.log("diceId", diceId);
+    // console.log("diceId", diceId);
 
     setHoldDice((prevDices) => {
       const updatedHolds = { ...prevDices };
@@ -174,10 +191,10 @@ const Play = () => {
       const newValues = { ...diceValues };
       Object.keys(newValues).forEach((diceId) => {
         if (!holdDice[diceId as keyof HoldDice]) {
-          // newValues[diceId as keyof HoldDice] =
-          //   Math.floor(Math.random() * 6) + 1;
           newValues[diceId as keyof HoldDice] =
-            Math.floor(Math.random() * 3) + 1;
+            Math.floor(Math.random() * 6) + 1;
+          // newValues[diceId as keyof HoldDice] =
+          //   Math.floor(Math.random() * 1) + 1;
         }
       });
 
@@ -398,12 +415,12 @@ const Play = () => {
     }
   };
 
-  console.log(
-    "every",
-    Object.values(locked).every((l) => l)
-  );
+  // console.log(
+  //   "every",
+  //   Object.values(locked).every((l) => l)
+  // );
 
-  console.log("locked", locked);
+  // console.log("locked", locked);
 
   // console.log("points", points);
   // console.log("sbutota", subtotal);
@@ -419,6 +436,7 @@ const Play = () => {
       {isHovered && hoverInfos && (
         <WhatToDo header={hoverInfos.header} children={hoverInfos.children} />
       )}
+      {isYatzy && <Yatzy />}
       <div className="the-game">
         <div className="game-header">
           <a onClick={() => navigate("/")}>

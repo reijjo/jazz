@@ -571,7 +571,12 @@
 
 .top-scores {
   margin: 0 16px;
-  width: 30%;
+  width: 40%;
+}
+
+.top-scores-latest {
+  font-size: 1.2rem;
+  color: var(--PRIMARY);
 }
 
 .scores-over {
@@ -590,4 +595,49 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+/* Yatzy 'animation' */
+.yatzy {
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: rgba(229, 220, 220, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.yatzy h1 {
+  font-size: 2rem;
+  opacity: 0;
+  animation: yatzy 1.5s ease-in-out forwards;
+}
+
+@keyframes yatzy {
+  0% {
+    transform: scale(20);
+  }
+
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(2);
+    opacity: 1;
+  }
+  /*
+  80% {
+    transform: scale(2);
+    opacity: 1;
+  } */
+
+  100% {
+    transform: scale(0);
+  }
 }
