@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseUrl = "http://localhost:3001/points";
-const baseUrl = "/points";
+// const baseUrl = "https://yatzy-gl0g.onrender.com/points";
+const baseUrl = "http://localhost:3001/points";
 
 const getAllPoints = async () => {
   const res = await axios.get(baseUrl);

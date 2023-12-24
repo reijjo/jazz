@@ -194,7 +194,7 @@ const Play = () => {
           newValues[diceId as keyof HoldDice] =
             Math.floor(Math.random() * 6) + 1;
           // newValues[diceId as keyof HoldDice] =
-          //   Math.floor(Math.random() * 1) + 1;
+          //   Math.floor(Math.random() * 2) + 1;
         }
       });
 
@@ -408,6 +408,13 @@ const Play = () => {
       }));
 
       resetHoldDice(setHoldDice);
+      setDiceValues({
+        dice1: 2,
+        dice2: 3,
+        dice3: 5,
+        dice4: 1,
+        dice5: 6,
+      });
 
       if (!gameOver) {
         setRolls(3);
@@ -429,6 +436,7 @@ const Play = () => {
   //   "points sum",
   //   Object.values(points).reduce((sum, value) => sum + (value || 0), 0)
   // );
+  console.log("dicebvalues", diceValues);
 
   // Return
   return (

@@ -2,8 +2,9 @@ import axios, { isAxiosError } from "axios";
 import { RegisterInfo } from "../utils/types";
 
 // Add a proxy to package.json and then use
-const baseUrl = "/users";
-// const baseUrl = "http://localhost:3001/users";
+// const baseUrl = "/users";
+// const baseUrl = "https://yatzy-gl0g.onrender.com/users";
+const baseUrl = "http://localhost:3001/users";
 
 // Use with token
 // const withToken = axios.create({

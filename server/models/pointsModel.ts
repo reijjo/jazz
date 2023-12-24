@@ -9,7 +9,7 @@ const pointsSchema = new mongoose.Schema(
     points: Number,
   },
   {
-    timestamps: true,
+    timestamps: { createdAt: true, updatedAt: false },
   }
 );
 

@@ -20,13 +20,19 @@ export const getAllPoints = async (_req: Request, res: Response) => {
 // POST
 // Add points
 export const addPoints = async (req: Request, res: Response) => {
-  const { points } = req.body;
+  const { username, points } = req.body;
 
+  console.log("username", username);
   console.log("points", points);
   console.log("reqbody", req.body);
 
+  if (!points) {
+    return res.status(400).json({ message: "Points missing?", info: "error" });
+  }
+
   try {
     const newPoints = new PointsModel({
+      username,
       points,
     });
 
