@@ -51,10 +51,10 @@ const Points = () => {
     (p) => p.points >= 200 && p.points < 250
   ).length;
   const under200 = [...points].filter(
-    (p) => p.points < 200 && p.points > 150
+    (p) => p.points < 200 && p.points >= 150
   ).length;
   const under150 = [...points].filter(
-    (p) => p.points < 150 && p.points > 100
+    (p) => p.points < 150 && p.points >= 100
   ).length;
   const under100 = [...points].filter((p) => p.points < 100).length;
 
