@@ -108,6 +108,11 @@ export type Points = {
   createdAt: Date;
 };
 
+export type AddPoints = {
+  username?: string;
+  points: number;
+};
+
 export enum GameCategories {
   Ones = "Ones",
   Twos = "Twos",

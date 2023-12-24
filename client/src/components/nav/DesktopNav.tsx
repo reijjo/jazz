@@ -6,20 +6,27 @@ type Props = {
   setFormLogin: Dispatch<SetStateAction<boolean>>;
 };
 
-const Navbar = ({ formLogin, setFormLogin }: Props) => {
+const DesktopNav = ({ formLogin, setFormLogin }: Props) => {
   return (
-    <nav>
-      <div className="nav-center">
-        <Link to="/" className="nav-links" onClick={() => setFormLogin(false)}>
+    <nav className="desktop-nav">
+      <div className="desktop-nav-center">
+        <Link
+          to="/"
+          className="desktop-nav-links"
+          onClick={() => setFormLogin(false)}
+        >
           <h3>home</h3>
         </Link>
-        <Link to="/play" className="nav-links">
+        <Link to="/play" className="desktop-nav-links">
           <h3>play</h3>
+        </Link>
+        <Link to="/scores" className="desktop-nav-links">
+          <h3>scores</h3>
         </Link>
         {formLogin ? (
           <Link
             to="/login"
-            className="nav-links"
+            className="desktop-nav-links"
             onClick={() => setFormLogin(false)}
           >
             <h3>register</h3>
@@ -27,7 +34,7 @@ const Navbar = ({ formLogin, setFormLogin }: Props) => {
         ) : (
           <Link
             to="/login"
-            className="nav-links"
+            className="desktop-nav-links"
             onClick={() => setFormLogin(true)}
           >
             <h3>login</h3>
@@ -38,4 +45,4 @@ const Navbar = ({ formLogin, setFormLogin }: Props) => {
   );
 };
 
-export default Navbar;
+export default DesktopNav;

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import userApi from "./api/userApi";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/nav/Navbar";
 import Homepage from "./pages/Homepage";
 import Sign from "./pages/Sign";
 import Lobby from "./pages/Lobby";
@@ -11,6 +11,7 @@ import Points from "./pages/Points";
 import { User } from "./utils/types";
 import authApi from "./api/authApi";
 import { isAxiosError } from "axios";
+import Scores from "./pages/Scores";
 
 const App = () => {
   // For the login / register form
@@ -88,6 +89,7 @@ const App = () => {
           }
         />
         <Route path="/play" element={<Play />} />
+        <Route path="/scores" element={<Scores />} />
         <Route
           path="/lobby"
           element={<Lobby user={user} setUser={setUser} />}

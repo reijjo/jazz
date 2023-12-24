@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { GameCategories, HoldDice, InfoMsg } from "./types";
+import { GameCategories, HoldDice, InfoMsg, Points } from "./types";
 import { isAxiosError } from "axios";
 
 import oneImg from "../assets/images/icons/rolldice/Side_1_Pip.png";
@@ -346,4 +346,33 @@ export const imgForDice = (value: number): string => {
     default:
       return "";
   }
+};
+
+// Sorting helpers
+export const topScores = (points: Points[]) => {
+  return points.sort((a, b) => b.points - a.points).slice(0, 5);
+};
+
+export const over300 = (points: Points[]) => {
+  return points.filter((p) => p.points >= 300).length;
+};
+
+export const over250 = (points: Points[]) => {
+  return points.filter((p) => p.points >= 250 && p.points < 300).length;
+};
+
+export const over200 = (points: Points[]) => {
+  return points.filter((p) => p.points >= 200 && p.points < 250).length;
+};
+
+export const under200 = (points: Points[]) => {
+  return points.filter((p) => p.points < 200 && p.points >= 150).length;
+};
+
+export const under150 = (points: Points[]) => {
+  return points.filter((p) => p.points < 150 && p.points >= 100).length;
+};
+
+export const under100 = (points: Points[]) => {
+  return points.filter((p) => p.points < 100).length;
 };

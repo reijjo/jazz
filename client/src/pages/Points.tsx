@@ -28,6 +28,7 @@ const Points = () => {
     points();
   }, []);
 
+  // Set loading false
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);

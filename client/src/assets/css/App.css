@@ -641,3 +641,52 @@
     transform: scale(0);
   }
 }
+
+/* Scores page */
+#scores {
+  border: 1px solid blue;
+  padding-top: 10vh;
+}
+
+.scores-grid {
+  margin: 64px 0 32px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.scores-top5,
+.scores-games {
+  border: 2px solid var(--TEXT);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.scores-top5 {
+  align-items: flex-start;
+}
+
+.scores-games {
+  align-items: flex-end;
+}
+
+.scores-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  max-width: 800px;
+}
+
+.scores-buttons > button {
+  width: 40%;
+}

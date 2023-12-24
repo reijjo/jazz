@@ -131,7 +131,11 @@ const Play = () => {
           setGameOver(true);
           localStorage.setItem("latestPoints", String(totalPoints));
 
-          await pointsApi.addPoints(totalPoints);
+          const newPoints = {
+            points: totalPoints,
+          };
+
+          await pointsApi.addPoints(newPoints);
           navigate("/points");
         } catch (error: unknown) {
           console.log("error", error);
@@ -436,7 +440,7 @@ const Play = () => {
   //   "points sum",
   //   Object.values(points).reduce((sum, value) => sum + (value || 0), 0)
   // );
-  console.log("dicebvalues", diceValues);
+  // console.log("dicebvalues", diceValues);
 
   // Return
   return (

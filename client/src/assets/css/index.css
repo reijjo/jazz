@@ -74,7 +74,7 @@ a {
 
 /* Navbar & Footer */
 
-nav {
+.desktop-nav {
   height: 10vh;
   width: 100%;
   position: fixed;
@@ -88,7 +88,7 @@ nav {
   /* background-color: rgba(0, 0, 0, 0.2); */
 }
 
-.nav-center {
+.desktop-nav-center {
   /* height: 100%; */
   background-color: var(--BG);
   width: 33%;
@@ -102,7 +102,7 @@ nav {
   align-items: center;
 }
 
-.nav-links:hover {
+.desktop-nav-links:hover {
   color: var(--SECONDARY);
 }
 
@@ -162,14 +162,17 @@ li {
   background-color: var(--PRIMARY3);
   border: 2px solid var(--TEXT);
   color: var(--TEXT);
-  box-shadow: -1px 1px 2px 0 var(--SECONDARY);
+  box-shadow: -2px 2px 4px 0 rgba(17, 135, 162, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .my-btn-filled:hover {
   background-color: var(--SECONDARY);
+  background-color: hsl(44, 100%, 61%);
+
   color: var(--WHITE);
-  box-shadow: -2px 2px 4px 0px rgba(232, 72, 44, 0.9);
+  color: var(--TEXT);
+  box-shadow: -2px 2px 4px 0px rgba(232, 72, 44, 0.5);
 }
 
 .my-btn-outline {
@@ -180,7 +183,7 @@ li {
 }
 
 .my-btn-outline:hover {
-  box-shadow: -4px 4px 16px 0px rgba(232, 72, 44, 0.9);
+  box-shadow: -4px 4px 8px 0px rgba(232, 72, 44, 0.3);
 }
 
 .extra-outline {
