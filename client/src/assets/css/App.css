@@ -47,6 +47,7 @@
 
 @media screen and (max-width: 600px) {
   #play {
+    padding-top: 0;
     margin-top: 16px;
     justify-content: flex-start;
   }
@@ -644,16 +645,21 @@
 
 /* Scores page */
 #scores {
-  border: 1px solid blue;
   padding-top: 10vh;
 }
 
+@media screen and (max-width: 600px) {
+  #scores {
+    padding-top: 6vh;
+  }
+}
+
 .scores-grid {
-  margin: 64px 0 32px 0;
+  margin: 24px 0 32px 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  width: 80%;
+  width: 90%;
   max-width: 800px;
 }
 
@@ -689,4 +695,22 @@
 
 .scores-buttons > button {
   width: 40%;
+}
+
+@media screen and (max-width: 760px) {
+  .scores-grid {
+    grid-template-columns: repeat(1, 1fr);
+    width: max-content;
+  }
+
+  .scores-buttons {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .scores-buttons > button {
+    margin: 0 0 24px 0;
+    width: 80%;
+    max-width: 300px;
+  }
 }

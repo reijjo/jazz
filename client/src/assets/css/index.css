@@ -74,18 +74,71 @@ a {
 
 /* Navbar & Footer */
 
-.desktop-nav {
+.desktop-nav,
+.mobile-nav {
   height: 10vh;
-  width: 100%;
+  /* width: 100%; */
   position: fixed;
   top: 0;
   left: 0;
-  border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1;
   /* background-color: rgba(0, 0, 0, 0.2); */
+}
+
+.mobile-nav {
+  height: 6vh;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.menu-button {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  height: 80%;
+  height: 32px;
+  aspect-ratio: 1/1;
+  margin-left: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--TEXT);
+  box-shadow: -2px 2px 4px 0 rgba(17, 135, 162, 0.2);
+  background: radial-gradient(
+    circle at center,
+    var(--WHITE) 10%,
+    var(--BG2) 80%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.menu-open {
+  /* width: 80%; */
+  width: 0;
+  max-width: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, transparent 0%, var(--BG) 100%);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 2px solid var(--TEXT);
+  box-shadow: 2px 0px 4px 0px rgba(232, 72, 44, 0.5);
+  transition: width 0.2s ease-out, max-width 0.2s ease-out; /* Define the transition here for both opening and closing */
+  overflow-x: hidden; /* This prevents horizontal scrolling on small screens */
+}
+
+.menu-open.active {
+  /* transition: width 0.3s ease-out; */
+  width: 80%;
+  max-width: 400px;
 }
 
 .desktop-nav-center {
@@ -103,6 +156,34 @@ a {
 }
 
 .desktop-nav-links:hover {
+  color: var(--SECONDARY);
+  justify-content: flex-start;
+}
+
+.mobile-nav-links-div {
+  display: flex;
+  flex-direction: column;
+  margin: 64px 0 0 0;
+  padding-left: 32px;
+  font-size: 1.2rem;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mobile-nav-links img {
+  margin-right: 8px;
+}
+
+.mobile-nav-links.scores,
+.mobile-nav-links.home {
+  margin-bottom: 16px;
+}
+
+.mobile-nav-links:hover {
   color: var(--SECONDARY);
 }
 
@@ -177,6 +258,7 @@ li {
 
 .my-btn-outline {
   background-color: transparent;
+  backdrop-filter: blur(16px);
   border: 2px solid var(--TEXT);
   color: var(--TEXT);
   transition: box-shadow 0.3s ease;

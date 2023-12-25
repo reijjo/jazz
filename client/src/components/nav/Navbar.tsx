@@ -23,7 +23,7 @@ const Navbar = ({ formLogin, setFormLogin }: Props) => {
   }, []);
 
   return isMobile ? (
-    <MobileNav />
+    <MobileNav formLogin={formLogin} setFormLogin={setFormLogin} />
   ) : (
     <DesktopNav formLogin={formLogin} setFormLogin={setFormLogin} />
   );
