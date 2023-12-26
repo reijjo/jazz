@@ -154,7 +154,7 @@ const Scores = () => {
           className="my-btn my-btn-filled"
           onClick={() => navigate("/play")}
         >
-          Play again?
+          Play?
         </button>
         <button className="my-btn my-btn-outline" onClick={() => navigate("/")}>
           Back to homepage
