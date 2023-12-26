@@ -34,4 +34,5 @@
     - clean the code a bit
   * loaders
   * name color
+  - safari problems
 </details>
