@@ -32,4 +32,6 @@
     - more tests
     - localstorage -> cookies
     - clean the code a bit
+  * loaders
+  * name color
 </details>
