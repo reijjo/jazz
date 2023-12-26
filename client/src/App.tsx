@@ -12,6 +12,7 @@ import { User } from "./utils/types";
 import authApi from "./api/authApi";
 import { isAxiosError } from "axios";
 import Scores from "./pages/Scores";
+import UserPlay from "./pages/UserPlay";
 
 const App = () => {
   // For the login / register form
@@ -74,7 +75,7 @@ const App = () => {
   return (
     <Router>
       {/* <main> */}
-      <Navbar formLogin={formLogin} setFormLogin={setFormLogin} />
+      <Navbar user={user} formLogin={formLogin} setFormLogin={setFormLogin} />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route
@@ -94,8 +95,12 @@ const App = () => {
           path="/lobby"
           element={<Lobby user={user} setUser={setUser} />}
         />
-        <Route path="*" element={<Homepage />} />
+        <Route
+          path="/userplay"
+          element={<UserPlay user={user} setUser={setUser} />}
+        />
         <Route path="/points" element={<Points />} />
+        <Route path="*" element={<Homepage />} />
       </Routes>
       {/* </main> */}
     </Router>

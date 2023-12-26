@@ -1,14 +1,16 @@
 import WhatToDo from "../components/WhatToDo";
 import GameRow from "../components/game/GameRow";
 import cancel from "../assets/images/icons/icons8-cancel-96.png";
+import { isAxiosError } from "axios";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 
 import {
   GameCategories,
   HoldDice,
   HoldPoints,
   LockPoints,
+  User,
 } from "../utils/types";
 import {
   resetHoldDice,
@@ -32,8 +34,16 @@ import {
 import { useNavigate } from "react-router-dom";
 import Yatzy from "../components/Yatzy";
 import pointsApi from "../api/pointsApi";
+import authApi from "../api/authApi";
 
-const Play = () => {
+type Props = {
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
+};
+
+const UserPlay = ({ user, setUser }: Props) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [holdDice, setHoldDice] = useState<HoldDice>({
     dice1: false,
     dice2: false,
@@ -123,6 +133,51 @@ const Play = () => {
     (points.Fives || 0) +
     (points.Sixes || 0);
 
+  // See if user is logged in
+  useEffect(() => {
+    const checkToken = async () => {
+      // Get token from localstorage
+      const token = localStorage.getItem("yatzy");
+
+      if (!token) {
+        console.log("No token found.");
+        setUser(null);
+        localStorage.removeItem("how");
+        navigate("/");
+      }
+
+      try {
+        if (token) {
+          const res = await authApi.authorization(token);
+
+          const validUser = res.user;
+
+          if (validUser) {
+            setUser(validUser);
+          } else {
+            setUser(null);
+            localStorage.clear();
+            navigate("/");
+          }
+        }
+      } catch (error: unknown) {
+        localStorage.clear();
+        setUser(null);
+        navigate("/");
+
+        if (isAxiosError(error)) {
+          console.log(error.response?.data);
+        } else {
+          console.error("Error checking token", error);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkToken();
+  }, [setUser, navigate]);
+
   // When every slot is locked and Game Over
   useEffect(() => {
     const theEnd = async () => {
@@ -134,6 +189,7 @@ const Play = () => {
           localStorage.setItem("latestPoints", String(totalPoints));
 
           const newPoints = {
+            username: user?.username,
             points: totalPoints,
           };
 
@@ -145,7 +201,7 @@ const Play = () => {
       }
     };
     theEnd();
-  }, [locked, totalPoints, navigate]);
+  }, [locked, totalPoints, navigate, user]);
 
   // Check for Bonus
   useEffect(() => {
@@ -443,6 +499,16 @@ const Play = () => {
   // );
   // console.log("dicebvalues", diceValues);
 
+  if (isLoading) {
+    return (
+      <section id="lobby">
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+      </section>
+    );
+  }
+
   // Return
   return (
     <section id="play">
@@ -456,7 +522,7 @@ const Play = () => {
             <img src={cancel} alt="cancel" title="go back" width="100%" />
           </a>
           <h2>
-            <span>Testiukko</span> {totalPoints} points
+            <span>{user?.username}</span> {totalPoints} points
           </h2>
         </div>
 
@@ -716,4 +782,4 @@ const Play = () => {
   );
 };
 
-export default Play;
+export default UserPlay;

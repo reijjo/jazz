@@ -422,14 +422,14 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
               />
             </div>
           </form>
+          <p>Already have an account? </p>
           <p>
-            Already have an account?{" "}
+            Then just click to{" "}
             <MyButton
               className="my-btn my-btn-text"
               children="Log in"
               onClick={() => setIsLogin(true)}
-            />{" "}
-            here!
+            />
           </p>
         </div>
       )}

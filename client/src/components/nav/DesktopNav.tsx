@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import { User } from "../../utils/types";
 
 type Props = {
   formLogin: boolean;
   setFormLogin: Dispatch<SetStateAction<boolean>>;
+  user: User | null;
+  userLogout: () => void;
 };
 
-const DesktopNav = ({ formLogin, setFormLogin }: Props) => {
+const DesktopNav = ({ formLogin, setFormLogin, user, userLogout }: Props) => {
   return (
     <nav className="desktop-nav">
       <div className="desktop-nav-center">
@@ -17,13 +20,17 @@ const DesktopNav = ({ formLogin, setFormLogin }: Props) => {
         >
           <h3>home</h3>
         </Link>
-        <Link to="/play" className="desktop-nav-links">
+        <Link to={user ? "/userplay" : "/play"} className="desktop-nav-links">
           <h3>play</h3>
         </Link>
-        <Link to="/scores" className="desktop-nav-links">
-          <h3>scores</h3>
+        <Link to={user ? "/lobby" : "/scores"} className="desktop-nav-links">
+          <h3>{user ? "my page" : "scores"}</h3>
         </Link>
-        {formLogin ? (
+        {user ? (
+          <Link to="/" className="desktop-nav-links" onClick={userLogout}>
+            <h3>logout</h3>
+          </Link>
+        ) : formLogin ? (
           <Link
             to="/login"
             className="desktop-nav-links"

@@ -85,9 +85,9 @@ const Points = () => {
           {latest ? <h1>Wohoo!</h1> : null}
           <div className="how-many">
             {latest ? (
-              <h2>You got {latest[0].points} Points!!</h2>
-            ) : // <h2>You got {localStorage.getItem("latestPoints")} Points!!</h2>
-            null}
+              // <h2>You got {latest[0].points} Points!!</h2>
+              <h2>You got {localStorage.getItem("latestPoints")} Points!!</h2>
+            ) : null}
             <div className="points-section">
               <div className="top-scores">
                 <h3>All time top 5</h3>

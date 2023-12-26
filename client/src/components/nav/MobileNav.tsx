@@ -6,13 +6,16 @@ import homeico from "../../assets/images/icons/icons8-home-48.png";
 import scoreico from "../../assets/images/icons/icons8-scoreboard-90.png";
 import playico from "../../assets/images/icons/icons8-play-64.png";
 import loginico from "../../assets/images/icons/icons8-login-100.png";
+import { User } from "../../utils/types";
 
 type Props = {
   formLogin: boolean;
   setFormLogin: Dispatch<SetStateAction<boolean>>;
+  user: User | null;
+  userLogout: () => void;
 };
 
-const MobileNav = ({ formLogin, setFormLogin }: Props) => {
+const MobileNav = ({ formLogin, setFormLogin, user, userLogout }: Props) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenu = () => {
@@ -63,7 +66,7 @@ const MobileNav = ({ formLogin, setFormLogin }: Props) => {
             <h3>home</h3>
           </Link>
           <Link
-            to="/play"
+            to={user ? "/userplay" : "/play"}
             className="mobile-nav-links"
             onClick={() => setMenuOpen(false)}
           >
@@ -77,7 +80,7 @@ const MobileNav = ({ formLogin, setFormLogin }: Props) => {
             <h3>play</h3>
           </Link>
           <Link
-            to="/scores"
+            to={user ? "/lobby" : "/scores"}
             className="mobile-nav-links scores"
             onClick={() => setMenuOpen(false)}
           >
@@ -88,9 +91,27 @@ const MobileNav = ({ formLogin, setFormLogin }: Props) => {
               height="24px"
               width="24px"
             />
-            <h3>scores</h3>
+            <h3>{user ? "my page" : "scores"}</h3>
           </Link>
-          {formLogin ? (
+          {user ? (
+            <Link
+              to="/"
+              className="mobile-nav-links"
+              onClick={() => {
+                setMenuOpen(false);
+                userLogout();
+              }}
+            >
+              <img
+                src={loginico}
+                alt="register"
+                title="register"
+                height="24px"
+                width="24px"
+              />
+              <h3>logout</h3>
+            </Link>
+          ) : formLogin ? (
             <Link
               to="/login"
               className="mobile-nav-links"

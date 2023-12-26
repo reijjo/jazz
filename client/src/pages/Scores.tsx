@@ -55,6 +55,8 @@ const Scores = () => {
           ))}
         </div>
         <div className="scores-games">
+          <h3>Total games played {points.length}</h3>
+
           <div>
             <h4>
               300+ points{" "}

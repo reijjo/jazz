@@ -1,14 +1,21 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
+import { User } from "../../utils/types";
 
 type Props = {
   formLogin: boolean;
   setFormLogin: Dispatch<SetStateAction<boolean>>;
+  user: User | null;
 };
 
-const Navbar = ({ formLogin, setFormLogin }: Props) => {
+const Navbar = ({ formLogin, setFormLogin, user }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 600);
+
+  const userLogout = () => {
+    localStorage.clear();
+    window.location.replace("/");
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,9 +30,19 @@ const Navbar = ({ formLogin, setFormLogin }: Props) => {
   }, []);
 
   return isMobile ? (
-    <MobileNav formLogin={formLogin} setFormLogin={setFormLogin} />
+    <MobileNav
+      user={user}
+      userLogout={userLogout}
+      formLogin={formLogin}
+      setFormLogin={setFormLogin}
+    />
   ) : (
-    <DesktopNav formLogin={formLogin} setFormLogin={setFormLogin} />
+    <DesktopNav
+      user={user}
+      userLogout={userLogout}
+      formLogin={formLogin}
+      setFormLogin={setFormLogin}
+    />
   );
 };
 
