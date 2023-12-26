@@ -13,6 +13,8 @@ import {
   under200,
 } from "../utils/helpers";
 import pointsApi from "../api/pointsApi";
+import theimg from "../assets/images/template.png";
+import MyButton from "../components/MyButton";
 
 type Props = {
   user: User | null;
@@ -115,7 +117,25 @@ const Lobby = ({ user, setUser }: Props) => {
   return (
     <section id="lobby">
       <div className="lobby-grid">
-        <div className="lobby-play"> kuva ja play</div>
+        <div className="lobby-play">
+          <div className="lobby-img">
+            <img
+              src={theimg}
+              alt="the img"
+              title="the image"
+              height="100%"
+              width="100%"
+            />
+          </div>
+          <div className="lobby-button">
+            <MyButton
+              className="my-btn my-btn-filled"
+              style={{ width: "100%" }}
+              children="Play!"
+              onClick={() => navigate("/userplay")}
+            />
+          </div>
+        </div>
         <div className="personal-top">
           <h3>Top 5 by {user?.username}</h3>
           {topScores(myPoints).map((points, index) => (

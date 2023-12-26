@@ -16,7 +16,7 @@ const Homepage = () => {
           <h1>Have a game of Yatzy!</h1>
           <h2>Roll the dice x 5.</h2>
           <MyButton
-            className="my-btn my-btn-filled"
+            className="my-btn my-btn-filled full-width"
             type="button"
             children="Play now!"
             style={{ marginTop: "24px", width: "33%", height: "8vh" }}
