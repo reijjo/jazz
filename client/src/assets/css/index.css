@@ -74,7 +74,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 2;
   /* background-color: rgba(0, 0, 0, 0.2); */
 }
 
@@ -106,7 +106,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 3;
 }
 
 .menu-open {
@@ -117,7 +117,6 @@ a {
   background: linear-gradient(to bottom, transparent 0%, var(--BG) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-
   display: flex;
   flex-direction: column;
 
