@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import pointsApi from "../api/pointsApi";
-import { Points } from "../utils/types";
+import { Points, User } from "../utils/types";
 
-const Points = () => {
+type Props = {
+  user: User | null;
+};
+
+const Points = ({ user }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [points, setPoints] = useState<Points[]>([]);
 
@@ -69,7 +73,7 @@ const Points = () => {
           alignItems: "center",
         }}
       >
-        <div>Loading...</div>
+        <div className="loading-spinner"></div>
       </section>
     );
   }
@@ -140,7 +144,9 @@ const Points = () => {
             <div className="play-again">
               <button
                 className="my-btn my-btn-filled"
-                onClick={() => navigate("/play")}
+                onClick={() =>
+                  user ? navigate("/userplay") : navigate("/play")
+                }
               >
                 Play again?
               </button>

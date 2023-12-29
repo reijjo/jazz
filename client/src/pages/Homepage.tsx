@@ -2,8 +2,13 @@ import MyButton from "../components/MyButton";
 
 import yatzy from "../assets/images/template.png";
 import { useNavigate } from "react-router-dom";
+import { User } from "../utils/types";
 
-const Homepage = () => {
+type Props = {
+  user: User | null;
+};
+
+const Homepage = ({ user }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +25,7 @@ const Homepage = () => {
             type="button"
             children="Play now!"
             style={{ marginTop: "24px", width: "33%", height: "8vh" }}
-            onClick={() => navigate("/play")}
+            onClick={() => (user ? navigate("/userplay") : navigate("/play"))}
           />
           <p style={{ paddingTop: "24px" }}>
             Or{" "}

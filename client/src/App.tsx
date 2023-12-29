@@ -16,7 +16,7 @@ import UserPlay from "./pages/UserPlay";
 
 const App = () => {
   // For the login / register form
-  const [formLogin, setFormLogin] = useState(false);
+  const [formLogin, setFormLogin] = useState(true);
 
   // Logged user
   const [user, setUser] = useState<User | null>(null);
@@ -77,7 +77,7 @@ const App = () => {
       {/* <main> */}
       <Navbar user={user} formLogin={formLogin} setFormLogin={setFormLogin} />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Homepage user={user} />} />
         <Route
           path="/login"
           element={
@@ -99,8 +99,8 @@ const App = () => {
           path="/userplay"
           element={<UserPlay user={user} setUser={setUser} />}
         />
-        <Route path="/points" element={<Points />} />
-        <Route path="*" element={<Homepage />} />
+        <Route path="/points" element={<Points user={user} />} />
+        <Route path="*" element={<Homepage user={user} />} />
       </Routes>
       {/* </main> */}
     </Router>

@@ -1,8 +1,8 @@
-import { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 interface Props {
   className?: string;
-  children?: string;
+  children?: ReactNode;
   onClick?: () => void | null;
   type?: "button" | "submit" | "reset" | undefined;
   style?: CSSProperties;

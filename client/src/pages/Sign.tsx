@@ -31,6 +31,7 @@ type Props = {
 };
 
 const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [regInput, setRegInput] = useState<RegisterInfo>({
     username: "",
     email: "",
@@ -185,6 +186,7 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
   // Register user
   const registerUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       const newUser: RegisterInfo = {
@@ -205,12 +207,15 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
       console.log("res", res);
     } catch (error: unknown) {
       errorMsgFunc(error, setInfoMessage, "error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // Login user
   const loginUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       const user: LoginInfo = {
@@ -235,9 +240,15 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
         user: "",
         passwd: "",
       });
-      navigate("/lobby");
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      //   navigate("/lobby");
+      // }, 5000);
     } catch (error: unknown) {
       errorMsgFunc(error, setInfoMessage, "error");
+    } finally {
+      setIsLoading(false);
+      navigate("/lobby");
     }
   };
 
@@ -285,7 +296,27 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
             <div className="my-input-button">
               <MyButton
                 className="my-btn my-btn-filled"
-                children="Login"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                children={
+                  isLoading ? (
+                    <div
+                      className="loading-spinner"
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        display: "flex",
+                        alignSelf: "center",
+                        justifySelf: "center",
+                      }}
+                    ></div>
+                  ) : (
+                    "Login"
+                  )
+                }
                 type="submit"
               />
             </div>
@@ -417,7 +448,22 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
             <div className="my-input-button">
               <MyButton
                 className="my-btn my-btn-filled"
-                children="Register"
+                children={
+                  isLoading ? (
+                    <div
+                      className="loading-spinner"
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        display: "flex",
+                        alignSelf: "center",
+                        justifySelf: "center",
+                      }}
+                    ></div>
+                  ) : (
+                    "Register"
+                  )
+                }
                 type="submit"
               />
             </div>
@@ -427,6 +473,11 @@ const Sign = ({ isLogin, setIsLogin, /* user, */ setUser }: Props) => {
             Then just click to{" "}
             <MyButton
               className="my-btn my-btn-text"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
               children="Log in"
               onClick={() => setIsLogin(true)}
             />

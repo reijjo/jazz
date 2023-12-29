@@ -105,9 +105,7 @@ const Lobby = ({ user, setUser }: Props) => {
   if (isLoading) {
     return (
       <section id="lobby">
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
+        <div className="loading-spinner"></div>
       </section>
     );
   }
