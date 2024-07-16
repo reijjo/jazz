@@ -21,7 +21,7 @@
 
 ### Play live
 
-- Deployed frontend with Netlfify and backend with Render so you can play it <a href='https://dancing-mousse-cb6e47.netlify.app/' target='_blank'>here</a>
+- Deployed frontend with Netlify and backend with Render so you can play it <a href='https://dancing-mousse-cb6e47.netlify.app/' target='_blank'>here</a>
 
 ### Run application
 
